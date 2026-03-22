@@ -422,23 +422,59 @@ el.innerHTML=h;
 }
 
 function rNet(el){
-const ND=[{id:"mgb",l:"Mass General Brigham",t:"v",x:400,y:60,sp:"+1,559%"},{id:"cca",l:"Commonwealth Care",t:"v",x:640,y:60},{id:"umm",l:"UMass Memorial",t:"v",x:180,y:60,sp:"+579%"},{id:"p32",l:"Point32Health",t:"v",x:840,y:130},{id:"evs",l:"Eversource",t:"v",x:60,y:190,sp:"+297%"},{id:"elv",l:"Elevance/WellPoint",t:"v",x:860,y:290},{id:"fln",l:"Fallon Health",t:"v",x:510,y:40},{id:"uhc",l:"United Healthcare",t:"v",x:760,y:55},{id:"kdm",l:"KDM (59 clients)",t:"l",x:330,y:225},{id:"scc",l:"SCC (103 clients)",t:"l",x:530,y:225},{id:"hck",l:"Hickey Assoc",t:"l",x:100,y:350},{id:"onl",l:"O'Neill Partners",t:"l",x:760,y:215},{id:"nxp",l:"Nixon Peabody",t:"l",x:860,y:400},{id:"img",l:"Issues Mgmt Grp",t:"l",x:700,y:150},{id:"hly",l:"Gov. Healey",t:"p",x:310,y:400},{id:"wu",l:"Mayor Wu",t:"p",x:410,y:440},{id:"gsk",l:"Rep. Gaskey",t:"p",x:60,y:460},{id:"ken",l:"Sen. Kennedy",t:"p",x:190,y:410}];
-const ED=[{f:"mgb",t:"kdm",l:"$306K",tp:"lo",w:4},{f:"umm",t:"scc",l:"$120K",tp:"lo",w:3},{f:"cca",t:"scc",l:"$150K",tp:"lo",w:3},{f:"cca",t:"img",l:"$108K",tp:"lo",w:2},{f:"uhc",t:"img",l:"$84K",tp:"lo",w:2},{f:"evs",t:"hck",l:"$180K",tp:"lo",w:3},{f:"p32",t:"onl",l:"$60K",tp:"lo",w:2},{f:"elv",t:"nxp",l:"$120K",tp:"lo",w:2},{f:"fln",t:"scc",l:"$15K",tp:"lo",w:1},{f:"mgb",t:"hly",l:"",tp:"do",w:1},{f:"mgb",t:"wu",l:"",tp:"do",w:1},{f:"evs",t:"gsk",l:"",tp:"do",w:1},{f:"umm",t:"ken",l:"",tp:"do",w:1}];
-const NC2={v:{f:"#1f1010",s:"#ef6b6b"},l:{f:"#1f1a0a",s:"#e8b84a"},p:{f:"#0a1520",s:"#5b9fd4"}};
-const EC2={lo:"#e8b84a",do:"#5b9fd4"};
-let h=`<p class="desc">Influence relationships between state vendors, lobbying firms, and elected officials. Click a node for details.</p>`;
-h+='<div class="leg"><span class="li"><span class="lb" style="background:#1f1010;border:1px solid #ef6b6b"></span>State vendors</span><span class="li"><span class="lb" style="background:#1f1a0a;border:1px solid #e8b84a"></span>Lobbying firms</span><span class="li"><span class="lb" style="background:#0a1520;border:1px solid #5b9fd4"></span>Officials</span><span class="li"><span class="ll" style="border-top:2px solid #e8b84a"></span>Lobbying fees</span><span class="li"><span class="ll" style="border-top:2px solid #5b9fd4"></span>Donations</span></div>';
-h+=`<svg viewBox="0 0 940 490">`;
-ED.forEach(e=>{const fn=ND.find(n=>n.id===e.f),tn=ND.find(n=>n.id===e.t);if(!fn||!tn)return;h+=`<line x1="${fn.x}" y1="${fn.y}" x2="${tn.x}" y2="${tn.y}" stroke="${EC2[e.tp]}" stroke-width="${e.w}" opacity="0.45"/>`;if(e.l)h+=`<text x="${(fn.x+tn.x)/2}" y="${(fn.y+tn.y)/2-5}" text-anchor="middle" font-size="8" font-weight="500" fill="${EC2[e.tp]}" opacity="0.8">${e.l}</text>`;});
-ND.forEach(n=>{const c=NC2[n.t];h+=`<g style="cursor:pointer" onclick="sn('${n.id}')"><rect x="${n.x-46}" y="${n.y-16}" width="92" height="32" rx="4" fill="${c.f}" stroke="${c.s}" stroke-width="1.3"/>`;if(n.sp)h+=`<rect x="${n.x+14}" y="${n.y-24}" width="32" height="12" rx="3" fill="#8b2020"/><text x="${n.x+30}" y="${n.y-15.5}" text-anchor="middle" font-size="7" font-weight="600" fill="#ef6b6b">${n.sp}</text>`;
-const words=n.l.split(' ');let l1=words.slice(0,Math.ceil(words.length/2)).join(' '),l2=words.slice(Math.ceil(words.length/2)).join(' ');
-if(n.l.length<=16){h+=`<text x="${n.x}" y="${n.y+3}" text-anchor="middle" font-size="9" font-weight="500" fill="${c.s}">${n.l}</text>`;}else{h+=`<text x="${n.x}" y="${n.y-2}" text-anchor="middle" font-size="8.5" font-weight="500" fill="${c.s}">${l1}</text><text x="${n.x}" y="${n.y+9}" text-anchor="middle" font-size="8.5" font-weight="500" fill="${c.s}">${l2}</text>`;}
-h+='</g>';});
-h+='</svg><div id="nd"></div>';el.innerHTML=h;
-}
-window.sn=function(id){
-const info={mgb:"Mass General Brigham — $1.44B in state spending, +1,559% YoY, $454K lobbying, $8K in donations to officials",cca:"Commonwealth Care Alliance — $1.3B state spending, $349K lobbying via SCC + Issues Mgmt Group",umm:"UMass Memorial — $250M state spending, +579% YoY, $124K lobbying, $1K to Sen. Kennedy",p32:"Point32Health (Harvard Pilgrim + Tufts) — $2.45B state spending, $624K lobbying",evs:"Eversource/NSTAR — $88M state spending, +297% YoY, $220K lobbying, $1K to Rep. Gaskey",elv:"Elevance/WellPoint — $1B state spending, $120K lobbying via Nixon Peabody",fln:"Fallon Health — $1.2B state spending, $15K lobbying via SCC",uhc:"United Healthcare — $618M state spending, $448K lobbying via Issues Mgmt Group + ML Strategies. Same lobbying firm (IMG) as Commonwealth Care Alliance.",kdm:"Kearney, Donovan & McGee — 59 clients, $3.5M revenue. Represents MGB ($1.44B). Former State Sen. Anthony Petruccelli on staff at $278K.",scc:"Smith, Costello & Crawford — 103 clients, $6.2M revenue. Healthcare clients receive $10.1B in state spending. Former State Rep. Carlo Basile earns $830K.",hck:"Hickey Associates — 22 clients, $1.4M revenue. Represents Eversource ($88M).",onl:"O'Neill & Partners — Represents Point32Health ($2.45B).",nxp:"Nixon Peabody — Represents Elevance/WellPoint ($1B).",img:"Issues Management Group — Represents BOTH CCA ($1.3B) AND United Healthcare ($618M). Combined $1.95B in state spending through clients of one firm.",hly:"Gov. Maura Healey — Appointed former BMC CEO Kate Walsh as HHS Secretary. Received campaign contributions from MGB.",wu:"Mayor Michelle Wu (Boston) — Received campaign contribution from MGB.",gsk:"Rep. John Gaskey — Received campaign contribution from Eversource.",ken:"Sen. Robyn Kennedy — Received campaign contribution from UMass Memorial."};
-document.getElementById('nd').innerHTML=`<div class="cd" style="margin-top:8px;font-size:12px;color:var(--t1);line-height:1.6">${info[id]||id}</div>`;};
+const W=960,VY=55,FY=200,OY=340,NW=90,NH=30;
+const vendors=[
+  {id:"evs",l:"Eversource",x:80,sp:"+297%"},
+  {id:"umm",l:"UMass Memorial",x:210,sp:"+579%"},
+  {id:"fln",l:"Fallon Health",x:340},
+  {id:"mgb",l:"Mass General\nBrigham",x:470,sp:"+1,559%"},
+  {id:"cca",l:"Commonwealth\nCare",x:600},
+  {id:"uhc",l:"United\nHealthcare",x:720},
+  {id:"p32",l:"Point32Health",x:830},
+  {id:"elv",l:"Elevance/\nWellPoint",x:930}
+];
+const firms=[
+  {id:"hck",l:"Hickey Assoc",x:80},
+  {id:"scc",l:"SCC\n(103 clients)",x:280},
+  {id:"kdm",l:"KDM\n(59 clients)",x:470},
+  {id:"img",l:"Issues Mgmt\nGroup",x:660},
+  {id:"onl",l:"O'Neill Partners",x:810},
+  {id:"nxp",l:"Nixon Peabody",x:930}
+];
+const officials=[
+  {id:"gsk",l:"Rep. Gaskey",x:80},
+  {id:"ken",l:"Sen. Kennedy",x:240},
+  {id:"hly",l:"Gov. Healey",x:430},
+  {id:"wu",l:"Mayor Wu",x:560}
+];
+const edges=[
+  {f:"evs",t:"hck",l:"$180K",c:"#e8b84a",w:2},
+  {f:"umm",t:"scc",l:"$120K",c:"#e8b84a",w:2},
+  {f:"fln",t:"scc",l:"$15K",c:"#e8b84a",w:1},
+  {f:"mgb",t:"kdm",l:"$306K",c:"#e8b84a",w:3},
+  {f:"cca",t:"scc",l:"$150K",c:"#e8b84a",w:2},
+  {f:"cca",t:"img",l:"$108K",c:"#e8b84a",w:2},
+  {f:"uhc",t:"img",l:"$84K",c:"#e8b84a",w:2},
+  {f:"p32",t:"onl",l:"$60K",c:"#e8b84a",w:1},
+  {f:"elv",t:"nxp",l:"$120K",c:"#e8b84a",w:2},
+  {f:"evs",t:"gsk",l:"",c:"#5b9fd4",w:1},
+  {f:"mgb",t:"hly",l:"",c:"#5b9fd4",w:1},
+  {f:"mgb",t:"wu",l:"",c:"#5b9fd4",w:1},
+  {f:"umm",t:"ken",l:"",c:"#5b9fd4",w:1}
+];
+const all=[...vendors.map(v=>({...v,y:VY,t:'v'})),...firms.map(f=>({...f,y:FY,t:'l'})),...officials.map(o=>({...o,y:OY,t:'p'}))];
+const NC={v:{f:"#1f1010",s:"#ef6b6b"},l:{f:"#1f1a0a",s:"#e8b84a"},p:{f:"#0a1520",s:"#5b9fd4"}};
+let h='<p class="desc">How state vendors connect to elected officials through lobbying firms. Money flows down: vendors (red) pay firms (amber) who lobby officials (blue). Click any node for details.</p>';
+h+='<div class="leg"><span class="li"><span class="lb" style="background:#1f1010;border:1px solid #ef6b6b"></span>State vendors</span><span class="li"><span class="lb" style="background:#1f1a0a;border:1px solid #e8b84a"></span>Lobbying firms</span><span class="li"><span class="lb" style="background:#0a1520;border:1px solid #5b9fd4"></span>Officials</span><span class="li"><span class="ll" style="border-top:2px solid #e8b84a"></span>Lobbying fees</span><span class="li"><span class="ll" style="border-top:2px solid #5b9fd4"></span>Campaign donations</span></div>';
+h+='<svg viewBox="0 0 '+W+' 400" style="font-family:DM Sans,sans-serif">';
+h+='<text x="10" y="30" font-size="9" fill="#444" font-weight="600" font-family="JetBrains Mono,monospace" letter-spacing="2">STATE VENDORS</text>';
+h+='<text x="10" y="178" font-size="9" fill="#444" font-weight="600" font-family="JetBrains Mono,monospace" letter-spacing="2">LOBBYING FIRMS</text>';
+h+='<text x="10" y="318" font-size="9" fill="#444" font-weight="600" font-family="JetBrains Mono,monospace" letter-spacing="2">ELECTED OFFICIALS</text>';
+h+='<line x1="0" y1="135" x2="'+W+'" y2="135" stroke="#222228" stroke-width="1" stroke-dasharray="4"/>';
+h+='<line x1="0" y1="280" x2="'+W+'" y2="280" stroke="#222228" stroke-width="1" stroke-dasharray="4"/>';
+edges.forEach(e=>{const fn=all.find(n=>n.id===e.f),tn=all.find(n=>n.id===e.t);if(!fn||!tn)return;const my=(fn.y+tn.y)/2;h+='<path d="M'+fn.x+' '+(fn.y+NH/2)+' C'+fn.x+' '+my+' '+tn.x+' '+my+' '+tn.x+' '+(tn.y-NH/2)+'" fill="none" stroke="'+e.c+'" stroke-width="'+e.w+'" opacity="0.4"/>';if(e.l){const lx=(fn.x+tn.x)/2,ly=my;h+='<text x="'+lx+'" y="'+(ly-3)+'" text-anchor="middle" font-size="8" font-weight="600" fill="'+e.c+'" opacity="0.8">'+e.l+'</text>';}});
+all.forEach(n=>{const c=NC[n.t];h+='<g style="cursor:pointer" onclick="sn(\''+n.id+'\')">';h+='<rect x="'+(n.x-NW/2)+'" y="'+(n.y-NH/2)+'" width="'+NW+'" height="'+NH+'" rx="5" fill="'+c.f+'" stroke="'+c.s+'" stroke-width="1.2"/>';if(n.sp)h+='<rect x="'+(n.x+NW/2-38)+'" y="'+(n.y-NH/2-12)+'" width="38" height="13" rx="3" fill="#4a1515"/><text x="'+(n.x+NW/2-19)+'" y="'+(n.y-NH/2-2.5)+'" text-anchor="middle" font-size="7" font-weight="700" fill="#ef6b6b">'+n.sp+'</text>';const lines=n.l.split('\\n');if(lines.length===1){h+='<text x="'+n.x+'" y="'+(n.y+3.5)+'" text-anchor="middle" font-size="8.5" font-weight="600" fill="'+c.s+'">'+lines[0]+'</text>';}else{h+='<text x="'+n.x+'" y="'+(n.y-2)+'" text-anchor="middle" font-size="8" font-weight="600" fill="'+c.s+'">'+lines[0]+'</text><text x="'+n.x+'" y="'+(n.y+8)+'" text-anchor="middle" font-size="8" font-weight="600" fill="'+c.s+'">'+lines[1]+'</text>';}h+='</g>';});
+h+='</svg><div id="nd"></div>';el.innerHTML=h;}
 
 function rFirms(el){
 let h=`<p class="desc">Registered lobbying firms connecting state vendors to the legislature. Eight firms profiled. 349 total clients. $11M in lobbyist salaries. Data from MA Secretary of State, 2024.</p>`;
