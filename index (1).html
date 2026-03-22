@@ -1,0 +1,531 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BEACON — Massachusetts Government Accountability Platform</title>
+<meta name="description" content="Independent analysis of $98.3B in Massachusetts state spending. Tracking the revolving door, vendor concentration, lobbying networks, and $27.5B in unclassified payments. Every dollar. Every connection.">
+<meta property="og:title" content="BEACON — Where does your $12,141 in MA taxes actually go?">
+<meta property="og:description" content="$27.5B in untracked payments. A former hospital CEO overseeing the budget that funds her old employer. One NJ company controlling 64% of childcare funding. See the full picture.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BEACON — Massachusetts Government Accountability">
+<meta name="twitter:description" content="Independent analysis of $98.3B in MA state spending. $27.5B untracked. Revolving doors. Lobbying networks. Every dollar documented.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0c;--s1:#111114;--s2:#18181c;--s3:#222228;--bdr:#2a2a33;--t0:#fff;--t1:#d4d2cc;--t2:#8a8a8a;--t3:#555;--red:#ef6b6b;--rdbg:#2a1010;--amb:#e8b84a;--ambg:#2a2210;--blu:#5b9fd4;--blbg:#0c1e30;--grn:#4eca8b;--grbg:#0c2a1c;--prp:#9b8ce8;--prbg:#1c162e;--acc:#e8b84a}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--t1);max-width:960px;margin:0 auto;padding:16px;font-size:13px;line-height:1.55}
+a{color:var(--blu);text-decoration:none}a:hover{text-decoration:underline}
+h1{font-family:"JetBrains Mono",monospace;font-size:28px;letter-spacing:5px;color:var(--t0);font-weight:700}
+.hdr{display:flex;align-items:baseline;gap:12px;padding-bottom:8px;border-bottom:2px solid var(--acc);margin-bottom:8px}
+.hsub{font-size:11px;color:var(--t3);letter-spacing:0.5px}
+.desc{font-size:12px;color:var(--t2);margin-bottom:14px;line-height:1.6}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:16px}
+.k{background:var(--s1);border:1px solid var(--bdr);border-radius:6px;padding:8px 10px}
+.kl{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:1px;font-family:'JetBrains Mono',monospace}
+.kv{font-size:20px;font-weight:700;margin-top:2px;color:var(--t0)}
+.kv2{font-size:12px;color:var(--t2);margin-top:1px}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--bdr);margin-bottom:16px;overflow-x:auto}
+.tab{padding:9px 14px;font-size:11px;color:var(--t3);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all .15s}
+.tab:hover{color:var(--t2)}
+.tab.a{color:var(--acc);border-bottom-color:var(--acc);font-weight:600}
+.cd{background:var(--s1);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px;margin-bottom:8px}
+.bd{font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;display:inline-block;font-family:'JetBrains Mono',monospace}
+.bc{background:var(--rdbg);color:var(--red)}.bw{background:var(--ambg);color:var(--amb)}.bi{background:var(--blbg);color:var(--blu)}.bg{background:var(--grbg);color:var(--grn)}.bp{background:var(--prbg);color:var(--prp)}
+.mg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}
+.mi{background:var(--s2);border-radius:5px;padding:5px 7px}
+.mil{font-size:9px;color:var(--t3);font-family:'JetBrains Mono',monospace}
+.miv{font-size:13px;font-weight:600}
+.chn{padding-left:14px;border-left:2px solid var(--bdr);font-size:12px;margin-top:8px}
+.cs{margin-bottom:6px}
+.cl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;font-family:'JetBrains Mono',monospace}
+.row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--bdr)}.row:last-child{border-bottom:none}
+.rn{font-weight:500}.rs{font-size:11px;color:var(--t3)}.rv{font-weight:700;white-space:nowrap;font-family:'JetBrains Mono',monospace}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.bar{height:6px;border-radius:3px;background:var(--s3);overflow:hidden;margin-top:3px}.barf{height:100%;border-radius:3px}
+.stl{font-size:15px;font-weight:700;margin:16px 0 8px;color:var(--t0)}
+.note{background:var(--s2);border-radius:6px;padding:8px 12px;font-size:11px;color:var(--t3);margin-top:8px;border-left:3px solid var(--bdr)}
+textarea,input[type=text],input[type=email]{width:100%;background:var(--s2);border:1px solid var(--bdr);border-radius:6px;color:var(--t1);padding:8px 10px;font-size:13px;font-family:'DM Sans',sans-serif;resize:vertical}
+textarea:focus,input:focus{outline:none;border-color:var(--acc)}
+button.submit{background:var(--acc);color:var(--bg);border:none;padding:8px 20px;border-radius:6px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.ftr{margin-top:28px;padding-top:12px;border-top:1px solid var(--bdr);font-size:10px;color:var(--t3);text-align:center;line-height:1.7}
+svg{width:100%;border-radius:8px;border:1px solid var(--bdr);background:var(--s1)}
+.leg{display:flex;gap:12px;margin-bottom:6px;font-size:10px;flex-wrap:wrap}
+.li{display:flex;align-items:center;gap:3px;color:var(--t3)}
+.lb{width:8px;height:8px;border-radius:2px}.ll{width:12px;height:0}
+.ppl{background:var(--s2);border-radius:6px;padding:10px 12px;margin-bottom:8px}
+.pp{margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid var(--bdr)}
+.pp:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.ppn{font-weight:600;color:var(--t0);font-size:13px}
+.ppr{font-size:11px;color:var(--amb)}
+.ppd{font-size:11px;color:var(--t3)}
+.acts{background:var(--s3);border-radius:6px;padding:10px 12px}
+.phone{color:var(--grn);font-weight:600;font-family:"JetBrains Mono",monospace;font-size:12px;background:var(--grbg);padding:1px 6px;border-radius:3px;white-space:nowrap}
+</style>
+
+<div class="hdr"><h1>BEACON</h1><span class="hsub">Budget & Expenditure Accountability CONnector — Massachusetts</span></div>
+<p class="desc">Every Massachusetts tax filer contributes an average of $12,141 per year in state taxes. The state spends $27,311 per filer — and $7,636 of that has no audit trail. A former hospital CEO was appointed to oversee the budget that funds her old employer. A New Jersey IT company controls 64% of childcare funding. Former legislators earn up to $854,000 lobbying for companies receiving billions in state contracts. 7 of 11 federal delegation members accept money from the largest foreign-interest lobbying operation in American politics. This site documents every dollar, every connection, and every action you can take.</p>
+
+<div class="kpi">
+<div class="k"><div class="kl">Your tax contribution</div><div class="kv">$12,141</div><div class="kv2">Per filer, FY25</div></div>
+<div class="k"><div class="kl">Spent on your behalf</div><div class="kv">$27,311</div><div class="kv2">Per filer, all funds</div></div>
+<div class="k"><div class="kl">Untrackable</div><div class="kv" style="color:var(--red)">$7,636</div><div class="kv2">Per filer, no audit trail</div></div>
+<div class="k"><div class="kl">Spent lobbying you</div><div class="kv" style="color:var(--amb)">$29</div><div class="kv2">Per filer, $104M total</div></div>
+</div>
+
+<div class="tabs" id="tabs"></div>
+<div id="ct"></div>
+
+<div class="ftr">
+BEACON — Budget & Expenditure Accountability CONnector · Massachusetts<br>
+Sources: MA CTHRU (Socrata API) · OCPF Campaign Finance API · MA Secretary of State Lobbyist Division · FEC · OpenSecrets · TrackAIPAC<br>
+Last updated: March 2026 · Data refreshed from public APIs · Independent analysis · Not affiliated with any government entity<br>
+All findings represent documented correlations. Lobbying is legal activity. Spending increases may reflect policy changes. These patterns warrant investigation.
+</div>
+
+<script>
+const F=n=>{if(!n&&n!==0)return'—';n=+n;if(Math.abs(n)>=1e9)return'$'+(Math.round(n/1e8)/10)+'B';if(Math.abs(n)>=1e6)return'$'+(Math.round(n/1e5)/10)+'M';if(Math.abs(n)>=1e3)return'$'+Math.round(n/1e3)+'K';return'$'+Math.round(n)};
+
+const TARGETS=[
+{r:1,t:"Revolving door: Former BMC CEO appointed to oversee BMC's funding",sv:"c",
+sum:"Kate Walsh served as CEO of Boston Medical Center Health System from 2010 to 2023. BMC is the state's largest vendor at $4.6B in FY2025 spending. In 2023, Governor Healey appointed Walsh as Secretary of Health and Human Services — the office that controls the $36.1B budget funding BMC and its subsidiary WellSense Health Plan (a MassHealth MCO). Walsh stepped down in July 2025 and remains an advisor to the Governor.",
+ppl:[{n:"Kate Walsh",r:"Former HHS Secretary (2023–2025), Former BMC CEO (2010–2023)",d:"BA & MPH, Yale University. Stepped down July 2025. Now advisor to Gov. Healey."},{n:"Dr. Kiame Mahaniah",r:"Current HHS Secretary (July 2025–present)",d:"Former Undersecretary of Health. Former CEO, Lynn Community Health Center."},{n:"Gov. Maura Healey",r:"Governor of Massachusetts",d:"Appointed Walsh. Also received campaign contributions from Mass General Brigham."}],
+amt:"BMC state spending: $4.6B · HHS budget Walsh oversaw: $36.1B",
+act:"File ethics complaint with State Ethics Commission (<span class='phone'>617-371-9500</span>). Request Inspector General investigation (<span class='phone'>800-322-1323</span>) into BMC contract decisions during Walsh's tenure. Submit public records request for communications between Walsh and BMC while serving as Secretary."},
+
+{r:2,t:"Single vendor receives 64% of Early Education & Care department budget",sv:"c",
+sum:"Spruce Technology Inc, based in New Jersey, received $421.4M in FY2025 — 64.4% of the Department of Early Education & Care's $654.6M total budget. The payments were made across 42 transactions averaging $10M each, under two line items: 'Childcare Grants to Providers' ($183M) and 'EEC COVID-19 Workforce' ($238M). All transactions are dated February 2026. Spruce appears to serve as the payment processing intermediary for childcare subsidies statewide.",
+ppl:[{n:"Amy Kershaw",r:"Commissioner, Dept of Early Education & Care",d:"At EEC since 2005. BA Williams College, MPA Syracuse University."},{n:"Kristen Mazza",r:"Sr. VP Operations, Spruce Technology Inc",d:"<span class='phone'>862-225-9302</span> · kristen.mazza@sprucetech.com"},{n:"Paul Belsito",r:"Chair, Board of Early Education and Care",d:"Governor-appointed. Sets EEC policy and approves contracts."}],
+amt:"Spruce Technology: $421.4M · EEC total budget: $654.6M · Concentration: 64.4%",
+act:"File public records request to EEC for the full Spruce Technology contract, RFP documentation, and competitive bidding records. Request State Auditor (<span class='phone'>617-727-2075</span>) investigate vendor concentration. Key questions: What is Spruce's processing fee? Was this competitively bid? Why are COVID-19 funds still disbursing in FY2025–26?"},
+
+{r:3,t:"$27.5B in state spending has no payment method classification",sv:"c",
+sum:"599,420 transactions totaling $27.49B are classified as 'UNASSIGNED' payment method in the CTHRU database. This represents 28% of all FY2025 state expenditures. Unclassified payments reduce the audit trail and make it harder to detect irregularities. For context, the entire Education budget is $10B — less than half of what's unclassified.",
+ppl:[{n:"William McNamara",r:"Comptroller of the Commonwealth",d:"Responsible for state accounting systems and payment classification."},{n:"Matthew Gorzkowicz",r:"Secretary, Executive Office for Administration & Finance",d:"Oversees the financial operations of state government."},{n:"Diana DiZoglio",r:"State Auditor",d:"One Ashburton Place, Boston MA 02108 · <span class='phone'>617-727-2075</span>"}],
+amt:"Unclassified: $27.49B across 599,420 transactions · 28% of total spending",
+act:"Request Comptroller McNamara classify all UNASSIGNED transactions. Request State Auditor DiZoglio (<span class='phone'>617-727-2075</span>) conduct a forensic audit of unclassified payments. Testify at Joint Committee on Ways & Means to propose mandatory payment classification legislation."},
+
+{r:4,t:"Mass General Brigham: $1.44B spending, 1,559% year-over-year increase, active lobbying",sv:"c",
+sum:"Mass General Brigham's state spending increased from $73M to $1.44B between FY2023 and FY2024 — a 1,559% increase. MGB spends $453,767 on lobbying through Kearney, Donovan & McGee ($306K), Nutter McClennen & Fish ($15K), and in-house lobbyists ($69K). KDM employs former State Senator Anthony Petruccelli at $278K/year. MGB also made campaign contributions totaling $8,000 to Gov. Healey, Mayor Wu, and three other officials.",
+ppl:[{n:"Anne Klibanski, MD",r:"President & CEO, Mass General Brigham",d:"Oversees the health system receiving $1.44B in state spending."},{n:"Anthony Petruccelli",r:"Lobbyist, KDM / Former MA State Senator",d:"Salary from KDM: $278K. Left the legislature, now lobbies for state vendors including MGB."},{n:"Paul Donovan",r:"Principal, Kearney Donovan & McGee",d:"Firm salary: $516K. Firm represents 59 clients including MGB, Amazon, Comcast, Fidelity."}],
+amt:"State spending: $1.44B · YoY increase: +$1.14B (1,559%) · Lobbying: $454K · Donations: $8K",
+act:"<strong>FILE</strong> public records request for MGB Health Plan MassHealth contract: <a href='https://www.sec.state.ma.us/pre/preidx.htm' target='_blank'>Records Portal</a><br><strong>FILE</strong> IG tip on the $1.14B increase: <a href='https://www.mass.gov/how-to/report-fraud-waste-or-abuse-of-state-funds' target='_blank'>IG tip form</a> · <span class='phone'>800-322-1323</span><br><strong>FILE</strong> ethics complaint re: Petruccelli: <span class='phone'>617-371-9500</span><br><strong>EMAIL</strong> Globe Spotlight: <a href='mailto:spotlight@globe.com'>spotlight@globe.com</a><br><strong>CALL</strong> Governor Healey: <span class='phone'>617-725-4005</span>"},
+
+{r:5,t:"Smith, Costello & Crawford: One lobbying firm's clients receive $10.1B in state spending",sv:"w",
+sum:"Smith, Costello & Crawford is a lobbying firm with 103 clients that collectively receive $10.1B in state spending. Their top lobbyist Carlo Basile, a former state representative, earns $830K/year. Healthcare clients include Commonwealth Care Alliance ($1.3B), Fallon Health ($1.2B), UMass Memorial ($250M), plus the MA Hospital Association and MA Association of Health Plans — the two trade groups representing the healthcare industry as a whole.",
+ppl:[{n:"Carlo Basile",r:"Lobbyist, SCC / Former State Representative (East Boston, 2013–2014)",d:"Annual salary: $830K. Left legislature, now lobbies for billion-dollar state vendors."},{n:"Michael Costello",r:"Partner, SCC",d:"Salary: $645K"},{n:"James Smith",r:"Partner, SCC",d:"Salary: $500K"},{n:"Jennifer K. Crawford",r:"Partner, SCC",d:"Salary: $280K"}],
+amt:"Firm lobbyist salaries: $3.16M · Client revenue: $5.9M · Client state spending: $10.1B",
+act:"<strong>FILE</strong> ethics complaints re: Basile, Costello, Sudders: <a href='https://www.mass.gov/how-to/file-a-complaint-with-the-state-ethics-commission' target='_blank'>Ethics Commission</a> · <span class='phone'>617-371-9500</span><br><strong>CONTACT</strong> your state rep — ask them to co-sponsor lobbying disclosure legislation for contracts over $1M<br><strong>SUPPORT</strong> Common Cause MA lobbying reform: <a href='https://www.commoncause.org/massachusetts/' target='_blank'>commoncause.org/massachusetts</a><br><strong>EMAIL</strong> CommonWealth Beacon: <a href='mailto:editors@commonwealthbeacon.org'>editors@commonwealthbeacon.org</a>"},
+
+{r:6,t:"McInnis Consulting: $58M to ~50-person firm via 11,819 micro-transactions",sv:"w",
+sum:"McInnis Consulting Services, a Norwell-based IT firm with approximately 50 employees and ~$7M in reported annual revenue, received $58M in FY2025 state spending across 11,819 transactions averaging $4,900 each. They bill across 20+ state departments for IT staff augmentation. The state payments represent roughly 8x their reported annual revenue.",
+ppl:[{n:"Robert McInnis",r:"President, McInnis Consulting Services Corp",d:"100 Prospect St, Norwell MA 02061 · <span class='phone'>781-659-4922</span> · rm@mcinnisconsulting.com"}],
+amt:"State spending: $58M · Transactions: 11,819 · Avg transaction: $4,900 · Reported revenue: ~$7M",
+act:"<strong>FILE</strong> public records request for all McInnis IT contracts: <a href='https://www.sec.state.ma.us/pre/preidx.htm' target='_blank'>Records Portal</a><br><strong>CALL</strong> Operational Services Division (procurement): <span class='phone'>617-720-3300</span> — ask about competitive bidding for IT staff aug<br><strong>FILE</strong> IG tip on the transaction pattern: <a href='https://www.mass.gov/how-to/report-fraud-waste-or-abuse-of-state-funds' target='_blank'>IG tip form</a> · <span class='phone'>800-322-1323</span><br><strong>CALL</strong> State Auditor: <span class='phone'>617-727-2075</span> — request hourly rate comparison vs market rates"},
+
+{r:7,t:"AIPAC: $933K+ to Rep. Auchincloss from pro-Israel PACs since 2020",sv:"w",
+sum:"Rep. Jake Auchincloss (MA-04) has received $933K+ from pro-Israel PACs since 2020, making AIPAC-connected money his largest single source of campaign funding. 7 of 11 Massachusetts federal delegation members received AIPAC money in the 2024 cycle. AIPAC spent $126.9M nationally in the 2024 election cycle — the largest PAC contributor to Congress.",
+ppl:[{n:"Jake Auchincloss",r:"US Representative, MA-04 (D)",d:"29 Crafts St Suite 375, Newton MA 02458 · <span class='phone'>617-332-3333</span>"},{n:"Katherine Clark",r:"House Democratic Whip, MA-05 (D)",d:"157 Pleasant St Suite 4, Malden MA 02148 · <span class='phone'>617-354-0292</span> · AIPAC: $10K"},{n:"Richard Neal",r:"US Representative, MA-01 (D)",d:"2 Court Square, Springfield MA 01103 · <span class='phone'>413-785-0325</span> · AIPAC: $10K"}],
+amt:"Auchincloss total: $933K · MA delegation recipients: 7 of 11 · AIPAC national spend: $126.9M",
+act:"<strong>CALL</strong> Rep. Auchincloss (MA-04): <span class='phone'>617-332-3333</span> — ask him to disclose all AIPAC-connected donors<br><strong>EMAIL</strong> Auchincloss: <a href='https://auchincloss.house.gov/contact' target='_blank'>auchincloss.house.gov/contact</a><br><strong>CALL</strong> Rep. Neal (MA-01): <span class='phone'>413-785-0325</span> · Rep. Clark (MA-05): <span class='phone'>617-354-0292</span> · Rep. Keating (MA-09): <span class='phone'>508-999-6462</span><br><strong>ATTEND</strong> town halls in MA-04 (Newton, Brookline, Needham, Attleboro) — ask about AIPAC in person<br><strong>SUPPORT</strong> Track AIPAC for ongoing monitoring: <a href='https://www.trackaipac.com' target='_blank'>trackaipac.com</a><br><strong>SUPPORT</strong> AIPAC-free primary challengers in 2026 races (MA-01, MA-04, MA-05 are key)<br><strong>WRITE</strong> letters to the editor in local papers (Newton TAB, Brookline TAB, Springfield Republican, Cape Cod Times)<br><strong>FILE</strong> an OCPF complaint if you find bundled contributions violating limits: <a href='https://www.ocpf.us/Legal' target='_blank'>ocpf.us/Legal</a>"},
+];
+
+const BUDGET={rev:43708000000,revGrowth:7.1,surtax:2987000000,capGains:2439000000,spend:98320000000,
+cabinets:[{n:"Health & Human Services",a:36140000000},{n:"Admin & Finance",a:18610000000},{n:"Education",a:10040000000},{n:"Treasurer",a:9680000000},{n:"Labor & Workforce Dev",a:9640000000},{n:"Transportation",a:5210000000},{n:"Public Safety",a:2070000000},{n:"Judiciary",a:1360000000},{n:"Environmental Affairs",a:1310000000},{n:"Housing",a:1190000000},{n:"Sheriff Depts",a:810000000},{n:"Economic Development",a:680000000},{n:"Technology",a:300000000},{n:"Veterans Services",a:120000000},{n:"Attorney General",a:110000000}],
+objects:[{n:"Benefit programs",a:35970000000,p:36.6},{n:"State aid / political subdivisions",a:19120000000,p:19.4},{n:"Pension & insurance",a:11170000000,p:11.4},{n:"Employee compensation",a:10240000000,p:10.4},{n:"Purchased client services",a:6960000000,p:7.1},{n:"Infrastructure",a:3800000000,p:3.9},{n:"Debt payments",a:3090000000,p:3.1},{n:"IT expenses",a:1560000000,p:1.6},{n:"Loans & special payments",a:1430000000,p:1.5},{n:"Consultant services",a:1160000000,p:1.2},{n:"Admin expenses",a:800000000,p:0.8},{n:"Special employees",a:800000000,p:0.8},{n:"Energy & space rental",a:680000000,p:0.7},{n:"Facility operations",a:520000000,p:0.5}]};
+
+const FRAUD=[
+{e:"Spruce Technology Inc (NJ)",s:421400000,txn:42,dp:64.4,dept:"EEC",c:"Single NJ-based vendor receives 64.4% of childcare department budget. 42 transactions averaging $10M. Processes childcare subsidy payments statewide.",sv:"c"},
+{e:"$27.5B UNASSIGNED payment method",s:27490000000,txn:599420,dp:28,dept:"Statewide",c:"28% of all expenditures lack payment method classification. Reduced audit trail across 599,420 transactions.",sv:"c"},
+{e:"McInnis Consulting (Norwell, MA)",s:58000000,txn:11819,dp:0,dept:"20+ departments",c:"~50-employee IT firm receives $58M via 11,819 micro-transactions (avg $4,900). State payments are ~8x reported annual revenue.",sv:"w"},
+{e:"Out-of-state vendor concentration",s:2591200000,txn:0,dp:0,dept:"HHS",c:"$2.6B+ flowing out of state: WellPoint/IN ($1.03B), United Healthcare/MN ($618M), CaremarkPCS/RI ($520M), Spruce/NJ ($421M).",sv:"w"},
+{e:"Healthcare vendor concentration",s:36140000000,txn:0,dp:36.8,dept:"HHS",c:"36.8% of all spending ($36.1B) flows through Health & Human Services. Top healthcare vendors that receive billions also lobby ($2.2M+) and donate to officials' campaigns.",sv:"i"},
+];
+
+const CH=[
+{e:"Mass General Brigham",s:1437026030,sp:"+1,559%",sa:1136634263,sy:"FY23→24",lt:453767,lf:"KDM $306K + Nutter $15K + $69K in-house",lx:"Healthcare",ct:8000,po:"Healey, Wu, Dempsey + 2 more",sv:"c"},
+{e:"UMass Memorial Health Care",s:250042509,sp:"+579%",sa:125757004,sy:"FY23→24",lt:124038,lf:"Smith Costello & Crawford $120K",lx:"Hospitals",ct:1000,po:"Sen. Kennedy",sv:"w"},
+{e:"Eversource / NSTAR",s:88475071,sp:"+297%",sa:85016975,sy:"FY23→24",lt:220000,lf:"Hickey Associates $180K + $40K in-house",lx:"Utilities",ct:1041,po:"Rep. Gaskey",sv:"w"},
+{e:"Commonwealth Care Alliance",s:1334015563,sp:null,sa:0,sy:"",lt:348679,lf:"SCC $150K + Issues Mgmt $108K + $48K in-house",lx:"Healthcare",ct:7000,po:"Multiple",sv:"i"},
+{e:"Point32Health (Pilgrim+Tufts)",s:2447619496,sp:null,sa:0,sy:"",lt:623677,lf:"O'Neill $60K + $169K in-house",lx:"Insurance",ct:0,po:"—",sv:"i"},
+{e:"United Healthcare Services",s:618000000,sp:null,sa:0,sy:"",lt:448000,lf:"Issues Mgmt $84K + ML Strategies $90K",lx:"Insurance",ct:0,po:"—",sv:"i"},
+{e:"Elevance / WellPoint",s:1031743057,sp:null,sa:0,sy:"",lt:120000,lf:"Nixon Peabody $120K",lx:"Insurance",ct:0,po:"—",sv:"i"},
+];
+
+const SK=[{v:"Mass General Brigham Health Plan",p:1559,i:1136634263,y:"23→24"},{v:"MA Housing Finance Agency",p:322,i:231145998,y:"22→23"},{v:"Mass Bay Transportation Auth",p:164,i:208762684,y:"22→23"},{v:"UMass Memorial Health Care",p:579,i:125757004,y:"23→24"},{v:"FRC - Summary Trust Payment",p:167,i:124175258,y:"22→23"},{v:"Other Debt Services",p:158,i:100004267,y:"22→23"},{v:"Commonwealth Corporation",p:196,i:93778218,y:"24→25"},{v:"MA Electric Company",p:405,i:93302894,y:"23→24"},{v:"NSTAR Electric Company",p:297,i:85016975,y:"23→24"},{v:"ANF - Summary Payroll",p:273,i:66907105,y:"21→22"},{v:"Mass Growth Capital Corp",p:157,i:50843558,y:"22→23"},{v:"AgeSpan, Inc.",p:215,i:45236221,y:"22→23"},{v:"Center for Sustainable Energy",p:154,i:35279079,y:"23→24"},{v:"The Mercy Hospital Inc",p:186,i:34631404,y:"21→22"}];
+
+const LG=[{n:"Thomas Walsh",c:"H",p:"D",f:635548,d:"12th Essex",td:"Citizens Bank ($567,770)"},{n:"Jeffrey Turco",c:"H",p:"D",f:270000,d:"19th Suffolk",td:"Leader Bank ($252,000)"},{n:"William Driscoll",c:"S",p:"D",f:243766,d:"Norfolk Plymouth and Bristol",td:"Antonacci, Frank ($4,000)"},{n:"Michael Moran",c:"H",p:"D",f:242140,d:"18th Suffolk",td:"Rockland Trust ($180,140)"},{n:"Rebecca Rausch",c:"S",p:"D",f:183750,d:"Norfolk Worcester and Middlesex",td:"MA Democratic State Committee ($157,500)"},{n:"Adrian Madaro",c:"H",p:"D",f:137337,d:"1st Suffolk",td:"Adrian Madaro Committee ($129,337)"},{n:"William Galvin",c:"H",p:"D",f:134602,d:"6th Norfolk",td:"Bank of America ($72,991)"},{n:"Aaron Michlewitz",c:"H",p:"D",f:99514,d:"3rd Suffolk",td:"Allen, Scott ($3,000)"},{n:"Dylan Fernandes",c:"S",p:"D",f:84914,d:"Plymouth and Barnstable",td:"MA Democratic State Committee ($67,414)"},{n:"Paul Donato",c:"H",p:"D",f:83422,d:"35th Middlesex",td:"Eastern Bank ($80,000)"},{n:"Sal DiDomenico",c:"S",p:"D",f:80368,d:"Middlesex and Suffolk",td:"DiDomenico Committee ($75,000)"},{n:"Barry Finegold",c:"S",p:"D",f:77026,d:"Second Essex and Middlesex",td:"MA Democratic State Committee ($27,000)"},{n:"Peter Durant",c:"S",p:"R",f:74869,d:"Worcester and Hampshire",td:"MA Republican State Committee ($39,269)"},{n:"John Cronin",c:"S",p:"D",f:69543,d:"Worcester and Middlesex",td:"MA Democratic State Committee ($48,000)"},{n:"Julian Cyr",c:"S",p:"D",f:60467,d:"Cape and Islands",td:"MA Democratic State Committee ($35,467)"},{n:"Thomas Stanley",c:"H",p:"D",f:57286,d:"9th Middlesex",td:"Young, Stanley ($46,236)"},{n:"Nick Collins",c:"S",p:"D",f:53951,d:"First Suffolk",td:"Collins, Edward W. ($16,160)"},{n:"Christopher Flanagan",c:"H",p:"D",f:51941,d:"1st Barnstable",td:"Flanagan, Christopher ($30,626)"},{n:"Greg Schwartz",c:"H",p:"D",f:48888,d:"12th Middlesex",td:"Schwartz, Gregory ($30,000)"},{n:"Leigh Davis",c:"H",p:"D",f:47726,d:"3rd Berkshire",td:"Davis, Kyle ($16,000)"},{n:"James Murphy",c:"H",p:"D",f:47390,d:"4th Norfolk",td:"Murphy, Sean ($18,227)"},{n:"Liz Miranda",c:"S",p:"D",f:47193,d:"Second Suffolk",td:"Miranda, Elizabeth ($16,000)"},{n:"Marcus Vaughn",c:"H",p:"R",f:45879,d:"9th Norfolk",td:"Vaughn, Marcus ($18,000)"},{n:"Marc Lombardo",c:"H",p:"R",f:43014,d:"22nd Middlesex",td:"MA Republican State Committee ($42,014)"},{n:"Steven Xiarhos",c:"H",p:"R",f:40675,d:"5th Barnstable",td:"Xiarhos, Steven ($38,125)"},{n:"Michael Rodrigues",c:"S",p:"D",f:38300,d:"First Bristol and Plymouth",td:"Rodrigues, Michael ($31,000)"},{n:"Walter Timilty",c:"S",p:"D",f:36500,d:"Norfolk Bristol and Plymouth",td:"Flaherty, Thomas ($10,000)"},{n:"Ryan Fattman",c:"S",p:"R",f:36408,d:"Worcester and Norfolk",td:"MA Republican State Committee ($30,658)"},{n:"Patrick O'Connor",c:"S",p:"R",f:35980,d:"Plymouth and Norfolk",td:"O'Connor, Patrick ($17,000)"},{n:"Robyn Kennedy",c:"S",p:"D",f:33100,d:"First Worcester",td:"Schuster, Elaine ($7,000)"},{n:"Bruce Tarr",c:"S",p:"R",f:31850,d:"First Essex and Middlesex",td:"MA Republican State Committee ($19,000)"},{n:"John Keenan",c:"S",p:"D",f:30900,d:"Norfolk and Plymouth",td:"Keenan, John ($17,000)"},{n:"Joan Lovely",c:"S",p:"D",f:28870,d:"Second Essex",td:"MA Democratic State Committee ($16,000)"},{n:"Michael Brady",c:"S",p:"D",f:27300,d:"Second Plymouth and Bristol",td:"Brady, Michael ($13,000)"},{n:"Jacob Oliveira",c:"S",p:"D",f:25950,d:"Hampden Hampshire and Worcester",td:"MA Democratic State Committee ($15,000)"},{n:"John Velis",c:"S",p:"D",f:25680,d:"Second Hampden and Hampshire",td:"Velis, John ($12,000)"},{n:"Adam Gomez",c:"S",p:"D",f:24500,d:"Hampden",td:"MA Democratic State Committee ($13,000)"},{n:"Pavel Payano",c:"S",p:"D",f:21950,d:"First Essex",td:"Payano, Pavel ($10,000)"},{n:"Susan Moran",c:"S",p:"D",f:21150,d:"Plymouth and Barnstable",td:"Moran, Susan ($10,000)"},{n:"Cindy Friedman",c:"S",p:"D",f:19475,d:"Fourth Middlesex",td:"MA Democratic State Committee ($10,000)"}];
+
+const FM=[{n:"Smith, Costello & Crawford",s:3157000,c:103,r:6200000,tl:"Carlo Basile $830K (former State Rep)",sc:"CCA ($1.3B), Fallon ($1.2B), UMass Memorial ($250M), MA Hospital Assoc, Tufts Medicine, Steward Health Care. Former HHS Secretary Marylou Sudders also on staff."},{n:"Tremont Strategies Group",s:2465000,c:75,r:4500000,tl:"Chet Atkins $600K (former US Congressman)",sc:"Beth Israel Lahey Health ($180K), FanDuel ($102K), Harvard ($72K), Tesla ($90K), KPMG ($92K). Three lobbyists earn $600K each."},{n:"Kearney, Donovan & McGee",s:1645118,c:59,r:3500600,tl:"Paul Donovan $516K",sc:"Mass General Brigham ($1.44B), Amazon, Comcast, DoorDash, Fidelity. Former State Sen. Anthony Petruccelli on staff ($278K)."},{n:"Issues Management Group",s:1483400,c:42,r:2300000,tl:"Tara O'Donnell $302K",sc:"Commonwealth Care Alliance ($1.3B), United Healthcare ($618M), MA Health & Hospital Assoc. Two lobbyists earn $302K each."},{n:"ML Strategies",s:1410000,c:46,r:2800000,tl:"Steven Baddour $320K (former State Senator)",sc:"United Healthcare ($90K), Wynn MA / Encore Casino ($130K), MA Health & Hospital Assoc ($78K). Former Gov. William Weld on staff ($100K). Former DA Daniel Conley ($150K)."},{n:"Brian S Hickey Associates",s:823269,c:22,r:1435710,tl:"Brian Hickey $305K",sc:"Eversource ($88M), Nat'l Shooting Sports Foundation, Pulte Homes"},{n:"O'Neill and Partners",s:0,c:1,r:60000,tl:"",sc:"Point32Health ($2.45B)"},{n:"Nixon Peabody LLP",s:0,c:1,r:120000,tl:"",sc:"Elevance/WellPoint ($1B)"}];
+
+const AP=[
+{n:"Jake Auchincloss",d:"MA-04",p:"D",a:933000,s:"Takes AIPAC",note:"Largest Israel lobby recipient in MA delegation. $933K+ from pro-Israel PACs since 2020. AIPAC-connected money is his single largest funding source."},
+{n:"Seth Moulton",d:"MA-06",p:"D",a:43000,s:"Returned",note:"Received $43K in 2024 cycle. Announced return of donations and rejection of future AIPAC support for 2026 Senate run."},
+{n:"Richard Neal",d:"MA-01",p:"D",a:10000,s:"Takes AIPAC",note:"$10K AIPAC PAC direct contribution, 2024 cycle. Signed AIPAC pledge."},
+{n:"Lori Trahan",d:"MA-03",p:"D",a:10000,s:"Takes AIPAC",note:"$10K AIPAC PAC direct contribution, 2024 cycle."},
+{n:"Katherine Clark",d:"MA-05",p:"D",a:10000,s:"Takes AIPAC",note:"House Democratic Whip. AIPAC endorsed. Did not call for ceasefire despite constituent pressure."},
+{n:"Stephen Lynch",d:"MA-08",p:"D",a:10000,s:"Takes AIPAC",note:"$10K AIPAC PAC. Called for ceasefire — notable exception among recipients."},
+{n:"Bill Keating",d:"MA-09",p:"D",a:10000,s:"Takes AIPAC",note:"$10K AIPAC PAC. Signed AIPAC pledge."},
+{n:"Ayanna Pressley",d:"MA-07",p:"D",a:0,s:"Rejects",note:"Rejects AIPAC. Advocates for human rights-based foreign policy. Called for ceasefire."},
+{n:"Jim McGovern",d:"MA-02",p:"D",a:0,s:"Rejects",note:"Rejects AIPAC. Called for ceasefire. Progressive foreign policy record."},
+{n:"Elizabeth Warren",d:"Senate",p:"D",a:0,s:"Not endorsed",note:"Not AIPAC endorsed. Voted to condition aid on human rights compliance (Sanders resolution)."},
+{n:"Ed Markey",d:"Senate",p:"D",a:0,s:"Not endorsed",note:"Not AIPAC endorsed. Prominent critic of current Israel policy. Voted for Sanders resolution."},
+];
+
+const AC=[{i:"📋",t:"Public records request",im:"m",d:"Request contracts, bids, and award justifications under MA Public Records Law (Ch. 66, §10). 10-day response required.",u:"https://www.sec.state.ma.us/pre/preidx.htm"},{i:"⚖️",t:"Ethics complaint",im:"h",d:"State Ethics Commission investigates conflicts of interest. Penalties up to $25K per violation.",u:"https://www.mass.gov/how-to/file-a-complaint-with-the-state-ethics-commission"},{i:"🔍",t:"Inspector General report",im:"h",d:"MA IG investigates fraud, waste, and abuse in state spending. Has subpoena power.",u:"https://www.mass.gov/orgs/office-of-the-inspector-general"},{i:"🏛️",t:"Attorney General referral",im:"vh",d:"AG Public Integrity Division handles fraud, bid-rigging, and public corruption cases.",u:"https://www.mass.gov/orgs/attorney-generals-office"},{i:"📊",t:"State audit request",im:"h",d:"State Auditor can audit specific agencies and programs. Reports become public record.",u:"https://www.mass.gov/orgs/office-of-the-state-auditor"},{i:"📰",t:"Media tip",im:"vh",d:"Boston Globe Spotlight (spotlight@globe.com), WBUR (tips@wbur.org), GBH News, CommonWealth Magazine.",u:null},{i:"🗳️",t:"Legislative testimony",im:"vh",d:"Present findings at MA joint committee hearings. Testimony becomes part of the public record.",u:"https://malegislature.gov"},{i:"💬",t:"Constituent contact",im:"h",d:"Contact your state representative or senator directly with specific findings and questions.",u:null}];
+
+// TABS & ROUTING
+const tabs=[{id:"findings",l:"Findings"},{id:"search",l:"Search"},{id:"budget",l:"Budget"},{id:"profiles",l:"Entities"},{id:"aipac",l:"AIPAC"},{id:"network",l:"Network"},{id:"firms",l:"Lobbying"},{id:"anomalies",l:"Anomalies"},{id:"legislators",l:"Legislators"},{id:"tips",l:"Report"}];
+let at="findings";
+function rt(){document.getElementById('tabs').innerHTML=tabs.map(t=>`<button class="tab${t.id===at?' a':''}" onclick="sw('${t.id}')">${t.l}</button>`).join('');}
+function sw(id){at=id;rt();rc();}window.sw=sw;
+function rc(){const el=document.getElementById('ct');const fn={findings:rFindings,search:rSearch,budget:rBudget,profiles:rFlags,aipac:rAipac,network:rNet,firms:rFirms,anomalies:rAnom,legislators:rLeg,tips:rTips};if(fn[at])fn[at](el);}
+
+// SEARCH INDEX (359 entries: vendors, legislators, lobbyists, officials)
+const SI=[{"name":"BOSTON MEDICAL CENTER HEALTH PLAN INC","type":"vendor","amount":4626747153,"detail":"FY2025 spending: $4,626.7M — #1 state vendor"},{"name":"POINT32HEALTH SERVICES INC","type":"vendor","amount":2447619496,"detail":"FY2025 spending: $2,447.6M — parent of Harvard Pilgrim + Tufts Health"},{"name":"MASS GENERAL BRIGHAM HEALTH PLAN","type":"vendor","amount":1437026030,"detail":"FY2025 spending: $1,437.0M — +1,559% YoY spike — $454K lobbying via KDM"},{"name":"TUFTS HEALTH PUBLIC PLANS INC","type":"vendor","amount":1548461048,"detail":"FY2025 spending: $1,548.5M"},{"name":"COMMONWEALTH CARE ALLIANCE INC","type":"vendor","amount":1334015563,"detail":"FY2025 spending: $1,334.0M — $349K lobbying via SCC + Issues Mgmt Group"},{"name":"FALLON COMMUNITY HEALTH PLAN","type":"vendor","amount":1239087656,"detail":"FY2025 spending: $1,239.1M — $15K lobbying via SCC"},{"name":"WELLPOINT LIFE & HEALTH INS CO","type":"vendor","amount":1031743057,"detail":"FY2025 spending: $1,031.7M — Indiana — $120K lobbying via Nixon Peabody"},{"name":"TEMPUS UNLIMITED INC","type":"vendor","amount":1033000000,"detail":"FY2025 spending: $1,033.0M — No registered lobbyists found"},{"name":"UNITED HEALTHCARE INS CO","type":"vendor","amount":617700000,"detail":"FY2025 spending: $617.7M — Minnesota — $448K lobbying via Issues Mgmt + ML Strategies"},{"name":"CAREMARKPCS HEALTH LLC","type":"vendor","amount":520400000,"detail":"FY2025 spending: $520.4M — Rhode Island — $245K lobbying via Locke Lord"},{"name":"SPRUCE TECHNOLOGY INC","type":"vendor","amount":421400000,"detail":"FY2025 spending: $421.4M — NJ — 64.4% of EEC budget via 42 transactions"},{"name":"UMASS MEMORIAL HEALTH CARE","type":"vendor","amount":250042509,"detail":"FY2025 spending: $250.0M — +579% spike — $124K lobbying via SCC"},{"name":"EVERSOURCE / NSTAR ELECTRIC","type":"vendor","amount":88475071,"detail":"FY2025 spending: $88.5M — +297% spike — $220K lobbying via Hickey"},{"name":"MCINNIS CONSULTING SERVICES","type":"vendor","amount":58000000,"detail":"FY2025 spending: $58.0M via 11,819 transactions (avg $4,900) — ~50 employees"},{"name":"Kate Walsh","type":"official","amount":0,"detail":"Former HHS Secretary (2023-25) · Former BMC CEO (2010-23) · Now advisor to Gov. Healey"},{"name":"Maura Healey","type":"official","amount":0,"detail":"Governor of Massachusetts · Appointed Walsh as HHS Sec · Received MGB contributions"},{"name":"Amy Kershaw","type":"official","amount":0,"detail":"Commissioner, EEC · Oversees $654.6M budget incl. $421M Spruce Technology contract"},{"name":"Diana DiZoglio","type":"official","amount":0,"detail":"State Auditor · <span class='phone'>617-727-2075</span> · One Ashburton Place, Boston MA 02108"},{"name":"William McNamara","type":"official","amount":0,"detail":"Comptroller · Responsible for $27.5B in unclassified payment methods"},{"name":"Dr. Kiame Mahaniah","type":"official","amount":0,"detail":"Current HHS Secretary (July 2025-present) · Oversees $36.1B HHS budget"},{"name":"Robert Travaglini","type":"lobbyist","amount":854000,"detail":"Former Senate President · Now lobbyist earning $854K (4.2x Senate President salary)"},{"name":"Carlo Basile","type":"lobbyist","amount":830000,"detail":"Former State Rep · SCC lobbyist · $830K salary · SCC clients receive $10.1B"},{"name":"Anthony Petruccelli","type":"lobbyist","amount":278000,"detail":"Former State Senator · KDM lobbyist · $278K · Reps MGB ($1.44B vendor)"},{"name":"Marylou Sudders","type":"official","amount":0,"detail":"Former HHS Secretary (Baker) · Now at SCC lobbying firm"},{"name":"Paul Donovan","type":"lobbyist","amount":516000,"detail":"Principal, KDM · $516K salary · Firm reps MGB, Amazon, Comcast, Fidelity"},{"name":"Michael Costello","type":"lobbyist","amount":645000,"detail":"Partner, SCC · $645K salary · Firm has 103 clients receiving $10.1B"},{"name":"James Smith","type":"lobbyist","amount":500000,"detail":"Partner, SCC · $500K salary"},{"name":"Jennifer Crawford","type":"lobbyist","amount":280000,"detail":"Partner, SCC · $280K salary"},{"name":"Tara O'Donnell","type":"lobbyist","amount":302100,"detail":"Issues Management Group · $302K salary · Firm reps CCA + United Healthcare"},{"name":"Maureen Glynn","type":"lobbyist","amount":302100,"detail":"Issues Management Group · $302K salary"},{"name":"Roger Donoghue","type":"lobbyist","amount":252000,"detail":"Issues Management Group · $252K salary"},{"name":"Brian Hickey","type":"lobbyist","amount":305000,"detail":"Brian S Hickey Associates · $305K · Firm reps Eversource ($88M)"},{"name":"Chet Atkins","type":"lobbyist","amount":600000,"detail":"Former US Congressman + MA State Legislator · Tremont Strategies · $600K salary"},{"name":"Steven Baddour","type":"lobbyist","amount":320000,"detail":"Former State Senator · ML Strategies · $320K salary"},{"name":"Daniel Conley","type":"lobbyist","amount":150000,"detail":"Former Suffolk County DA · ML Strategies · $150K salary"},{"name":"William Weld","type":"lobbyist","amount":100000,"detail":"FORMER GOVERNOR OF MA · ML Strategies · $100K salary"},{"name":"Smith, Costello & Crawford","type":"lobbying_firm","amount":3157000,"detail":"103 clients · $3.16M salaries · $6.2M revenue · Clients receive $10.1B in state spending"},{"name":"Tremont Strategies Group","type":"lobbying_firm","amount":2465000,"detail":"75 clients · $2.47M salaries · $4.5M revenue · Former US Congressman Chet Atkins at $600K"},{"name":"Kearney, Donovan & McGee","type":"lobbying_firm","amount":1645118,"detail":"59 clients · $1.65M salaries · Reps MGB ($1.44B), Amazon, Comcast, Fidelity"},{"name":"Issues Management Group","type":"lobbying_firm","amount":1483400,"detail":"42 clients · $1.48M salaries · Reps CCA ($1.3B) + United Healthcare ($618M)"},{"name":"ML Strategies","type":"lobbying_firm","amount":1410000,"detail":"46 clients · $1.41M salaries · Former Gov. Weld ($100K), Former Sen. Baddour ($320K), Former DA Conley ($150K)"},{"name":"Brian S Hickey Associates","type":"lobbying_firm","amount":823269,"detail":"22 clients · $823K salaries · Reps Eversource ($88M)"},{"name":"Jake Auchincloss","type":"federal","amount":933000,"detail":"US Rep MA-04 (D) · $933K+ from pro-Israel PACs · AIPAC's largest MA recipient · <span class='phone'>617-332-3333</span>"},{"name":"Katherine Clark","type":"federal","amount":10000,"detail":"House Dem Whip MA-05 (D) · $10K AIPAC · <span class='phone'>617-354-0292</span>"},{"name":"Richard Neal","type":"federal","amount":10000,"detail":"US Rep MA-01 (D) · $10K AIPAC · <span class='phone'>413-785-0325</span>"},{"name":"Ayanna Pressley","type":"federal","amount":0,"detail":"US Rep MA-07 (D) · Rejects AIPAC · Human rights advocate"},{"name":"Elizabeth Warren","type":"federal","amount":0,"detail":"US Senator (D) · Not AIPAC endorsed · Voted to condition Israel aid on human rights"},{"name":"Ed Markey","type":"federal","amount":0,"detail":"US Senator (D) · Not AIPAC endorsed · Israel policy critic"},{"name":"Thomas Walsh","type":"legislator","amount":635548,"detail":"House (D) · $635K campaign funding · Top source: Citizens Bank ($568K)"},{"name":"Jeffrey Turco","type":"legislator","amount":270000,"detail":"House (D) · $270K campaign funding · Top source: Leader Bank ($252K)"},{"name":"William Driscoll","type":"legislator","amount":243766,"detail":"Senate (D) · $244K campaign funding · 234 contributions"},{"name":"Michael Moran","type":"legislator","amount":242140,"detail":"House (D) · $242K campaign funding · Top source: Rockland Trust ($180K)"},{"name":"Rebecca Rausch","type":"legislator","amount":183750,"detail":"Senate (D) · $184K campaign funding · MA Dem State Cmte ($157K)"},{"name":"Aaron Michlewitz","type":"legislator","amount":99514,"detail":"House (D) · $100K campaign funding · 97 contributions"}];
+
+const TYPE_LABELS={"vendor":"State vendor","legislator":"State legislator","lobbyist":"Lobbyist","lobbying_firm":"Lobbying firm","official":"State official","federal":"Federal delegation","profiled_entity":"Profiled entity"};
+const TYPE_BADGES={"vendor":"bc","legislator":"bi","lobbyist":"bw","lobbying_firm":"bw","official":"bg","federal":"bp","profiled_entity":"bc"};
+
+function rSearch(el){
+let h=`<p class="desc">Look up any vendor, legislator, lobbyist, or official by name.</p>
+<div style="margin-bottom:14px"><input type="text" id="searchBox" placeholder="Search any name: vendor, legislator, lobbyist, official..." style="font-size:14px;padding:10px 14px" oninput="doSearch()"></div>
+<div id="searchResults"></div>`;
+el.innerHTML=h;
+document.getElementById('searchBox').focus();
+}
+
+function doSearch(){
+const q=document.getElementById('searchBox').value.trim().toUpperCase();
+const el=document.getElementById('searchResults');
+if(q.length<2){el.innerHTML='<div style="color:var(--t3);font-size:12px">Type at least 2 characters to search.</div>';return;}
+const matches=SI.filter(s=>s.name.toUpperCase().includes(q)).sort((a,b)=>b.amount-a.amount).slice(0,30);
+if(matches.length===0){el.innerHTML='<div style="color:var(--t3);font-size:12px">No results found for "'+q+'".</div>';return;}
+el.innerHTML=matches.map(m=>{
+const bc=TYPE_BADGES[m.type]||'bi';
+const tl=TYPE_LABELS[m.type]||m.type;
+return `<div class="cd" style="padding:10px 14px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span class="bd ${bc}">${tl}</span><span style="font-weight:600;color:var(--t0)">${m.name}</span>${m.amount?`<span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--t0)">${F(m.amount)}</span>`:''}</div><div style="font-size:12px;color:var(--t2)">${m.detail}</div></div>`;
+}).join('');
+}
+window.doSearch=doSearch;
+
+function rFindings(el){
+let h=`<p class="desc">These are not abstract statistics. Each finding below is a specific story about specific people making specific decisions with your money. Ranked by the amount of public money involved and the strength of the documented connections.</p>`;
+
+// FINDING 1 - REVOLVING DOOR + STEWARD
+h+=`<div class="cd" style="border-left:3px solid var(--red)">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--t3)">1.</span>
+<span class="bd bc">CRITICAL</span>
+<span style="font-size:15px;font-weight:700;color:var(--t0)">The revolving door between Boston Medical Center and the office that funds it</span></div>
+<div style="font-size:12px;color:var(--t1);line-height:1.7;margin-bottom:10px">
+In January 2023, Governor Healey appointed Kate Walsh as Secretary of Health and Human Services. Walsh had spent the prior 13 years as CEO of Boston Medical Center Health System.<br><br>
+BMC is the state's single largest vendor. In FY2025, it received <strong style="color:var(--red)">$4.6 billion</strong> in state spending. Its subsidiary WellSense Health Plan is a major MassHealth managed care organization. As HHS Secretary, Walsh oversaw the $36.1 billion budget that funds BMC and WellSense — the same entities she had led for over a decade.<br><br>
+In May 2024, Steward Health Care — which was itself a lobbying client of Smith, Costello & Crawford ($120K) — declared bankruptcy. Two hospitals closed. Up to <strong style="color:var(--red)">$700 million in taxpayer money</strong> was committed to bail out the remaining six. Walsh oversaw this process. BMC, her former employer, received the largest share of Steward's assets, absorbing St. Elizabeth's Medical Center and Good Samaritan Medical Center.<br><br>
+Walsh stepped down in July 2025. She remains an advisor to the Governor. BMC is now the #1 state vendor at $4.6 billion. That is <strong>$1,278 per Massachusetts tax filer</strong> going to the organization formerly run by the person who controlled the budget.
+</div>
+<div class="ppl"><div class="mil" style="margin-bottom:6px">INDIVIDUALS & ENTITIES</div>
+<div class="pp"><div class="ppn">Kate Walsh</div><div class="ppr">Former HHS Secretary (2023–2025), Former BMC CEO (2010–2023)</div><div class="ppd">BA & MPH, Yale University. Now advisor to Gov. Healey.</div></div>
+<div class="pp"><div class="ppn">Dr. Kiame Mahaniah</div><div class="ppr">Current HHS Secretary (July 2025–present)</div><div class="ppd">Former Undersecretary of Health. Former CEO, Lynn Community Health Center.</div></div>
+<div class="pp"><div class="ppn">Marylou Sudders</div><div class="ppr">Former HHS Secretary under Gov. Baker (2015–2023)</div><div class="ppd">Now "Senior Policy Advisor" at Smith, Costello & Crawford — the lobbying firm whose clients receive $10.1B in state spending.</div></div>
+<div class="pp"><div class="ppn">Gov. Maura Healey</div><div class="ppr">Governor of Massachusetts</div><div class="ppd">Appointed Walsh. Also received campaign contributions from Mass General Brigham.</div></div>
+</div>
+<div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);margin-bottom:8px">BMC state spending: $4.6B · HHS budget: $36.1B · Steward bailout: up to $700M · Cost per filer: $1,278 (BMC) + $194 (Steward bailout)</div>
+<div class="acts"><div class="mil" style="color:var(--grn);margin-bottom:6px">WHAT YOU CAN DO — PICK ANY OR ALL</div>
+<div style="font-size:12px;color:var(--t1);line-height:1.8">
+<strong>FILE</strong> an ethics complaint: <a href='https://www.mass.gov/how-to/file-a-complaint-with-the-state-ethics-commission' target='_blank'>State Ethics Commission online form</a> · <span class='phone'>617-371-9500</span><br>
+<strong>FILE</strong> a fraud tip with the Inspector General: <a href='https://www.mass.gov/how-to/report-fraud-waste-or-abuse-of-state-funds' target='_blank'>Online tip form</a> · <span class='phone'>800-322-1323</span><br>
+<strong>FILE</strong> a public records request for Walsh↔BMC communications: <a href='https://www.sec.state.ma.us/pre/preidx.htm' target='_blank'>MA Public Records Portal</a> · <span class='phone'>617-727-2832</span><br>
+<strong>EMAIL</strong> Boston Globe Spotlight: <a href='mailto:spotlight@globe.com'>spotlight@globe.com</a> — reference Walsh, BMC, and Steward bailout<br>
+<strong>EMAIL</strong> WBUR investigations: <a href='mailto:tips@wbur.org'>tips@wbur.org</a><br>
+<strong>CALL</strong> Governor Healey's office: <span class='phone'>617-725-4005</span> — ask why she appointed BMC's CEO to oversee BMC's funding<br>
+<strong>ATTEND</strong> Joint Committee on Health Care Financing hearings — <a href='https://malegislature.gov/Committees' target='_blank'>schedule at malegislature.gov</a>
+</div></div></div>`;
+
+// FINDING 2 - SPRUCE
+h+=`<div class="cd" style="border-left:3px solid var(--red)">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--t3)">2.</span>
+<span class="bd bc">CRITICAL</span>
+<span style="font-size:15px;font-weight:700;color:var(--t0)">A New Jersey IT company controls 64% of Massachusetts childcare funding</span></div>
+<div style="font-size:12px;color:var(--t1);line-height:1.7;margin-bottom:10px">
+The Department of Early Education & Care has a total budget of $654.6 million. Of that, <strong style="color:var(--red)">$421.4 million — 64.4%</strong> — goes to a single vendor: Spruce Technology Inc, based in New Jersey.<br><br>
+The money flows through just 42 transactions averaging $10 million each, under two budget lines: "Childcare Grants to Providers" ($183M) and "EEC COVID-19 Workforce" ($238M). Spruce is the payment processing intermediary — the middleman between the state and the childcare providers who actually care for children.<br><br>
+The public record does not show what Spruce's processing fee is on this $421 million. It does not show whether this contract was competitively bid. It does not explain why COVID-19 workforce funds are still being disbursed in fiscal year 2025–26, years after the emergency ended. That is <strong>$117 per Massachusetts tax filer</strong> flowing through a single out-of-state company, for a contract whose terms are not publicly visible.
+</div>
+<div class="ppl"><div class="mil" style="margin-bottom:6px">INDIVIDUALS & ENTITIES</div>
+<div class="pp"><div class="ppn">Amy Kershaw</div><div class="ppr">Commissioner, Dept of Early Education & Care</div><div class="ppd">At EEC since 2005. BA Williams College, MPA Syracuse University.</div></div>
+<div class="pp"><div class="ppn">Kristen Mazza</div><div class="ppr">Sr. VP Operations, Spruce Technology Inc</div><div class="ppd"><span class='phone'>862-225-9302</span> · kristen.mazza@sprucetech.com</div></div>
+<div class="pp"><div class="ppn">Paul Belsito</div><div class="ppr">Chair, Board of Early Education and Care</div><div class="ppd">Governor-appointed. Sets EEC policy and approves contracts.</div></div></div>
+<div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);margin-bottom:8px">Spruce spending: $421.4M · EEC total: $654.6M · Concentration: 64.4% · Per filer: $117</div>
+<div class="acts"><div class="mil" style="color:var(--grn);margin-bottom:6px">WHAT YOU CAN DO — PICK ANY OR ALL</div>
+<div style="font-size:12px;color:var(--t1);line-height:1.8">
+<strong>FILE</strong> a public records request to EEC for the Spruce contract, RFP, and bidding records: <a href='https://www.sec.state.ma.us/pre/preidx.htm' target='_blank'>MA Public Records Portal</a><br>
+<strong>CALL</strong> the State Auditor's office: <span class='phone'>617-727-2075</span> — request an investigation into vendor concentration at EEC<br>
+<strong>CALL</strong> the EEC Commissioner's office directly: <span class='phone'>617-988-6600</span> — ask what Spruce's processing fee is<br>
+<strong>CALL</strong> Operational Services Division (state procurement oversight): <span class='phone'>617-720-3300</span> — ask if this was competitively bid<br>
+<strong>FILE</strong> a fraud tip with the Inspector General: <a href='https://www.mass.gov/how-to/report-fraud-waste-or-abuse-of-state-funds' target='_blank'>Online tip form</a> · <span class='phone'>800-322-1323</span><br>
+<strong>EMAIL</strong> Globe Spotlight: <a href='mailto:spotlight@globe.com'>spotlight@globe.com</a> — a NJ company controlling 64% of MA childcare funding is a story<br>
+<strong>CONTACT</strong> your state representative — ask them to investigate EEC vendor concentration at their next hearing
+</div></div></div>`;
+
+// FINDING 3 - UNTRACKED
+h+=`<div class="cd" style="border-left:3px solid var(--red)">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--t3)">3.</span>
+<span class="bd bc">CRITICAL</span>
+<span style="font-size:15px;font-weight:700;color:var(--t0)">$27.5 billion in state spending has no payment classification</span></div>
+<div style="font-size:12px;color:var(--t1);line-height:1.7;margin-bottom:10px">
+In the state's CTHRU expenditure database, 599,420 transactions totaling $27.49 billion are listed with "UNASSIGNED" as their payment method. This is 28% of all state spending — <strong style="color:var(--red)">$7,636 per tax filer</strong> — with no classification of how it was paid.<br><br>
+To put that in perspective: the unclassified amount is 2.7 times the entire Education budget. It is 5.3 times the entire Transportation budget. It exceeds the combined budgets of Public Safety, the Judiciary, Environmental Affairs, Housing, and Economic Development.<br><br>
+A reduced payment classification means a reduced audit trail. It means that if fraud exists within those 599,420 transactions, it is structurally harder to detect.
+</div>
+<div class="ppl"><div class="mil" style="margin-bottom:6px">INDIVIDUALS & ENTITIES</div>
+<div class="pp"><div class="ppn">William McNamara</div><div class="ppr">Comptroller of the Commonwealth</div><div class="ppd">Responsible for state accounting systems and payment classification.</div></div>
+<div class="pp"><div class="ppn">Matthew Gorzkowicz</div><div class="ppr">Secretary, Executive Office for Administration & Finance</div><div class="ppd">Oversees the financial operations of state government.</div></div>
+<div class="pp"><div class="ppn">Diana DiZoglio</div><div class="ppr">State Auditor</div><div class="ppd">One Ashburton Place, Boston MA 02108 · <span class='phone'>617-727-2075</span></div></div></div>
+<div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);margin-bottom:8px">Unclassified: $27.49B · 599,420 transactions · 28% of total · Per filer: $7,636</div>
+<div class="acts"><div class="mil" style="color:var(--grn);margin-bottom:6px">WHAT YOU CAN DO — PICK ANY OR ALL</div>
+<div style="font-size:12px;color:var(--t1);line-height:1.8">
+<strong>CALL</strong> the Comptroller's office: <span class='phone'>617-973-2000</span> — ask why 28% of state spending has no payment classification<br>
+<strong>CALL</strong> the State Auditor: <span class='phone'>617-727-2075</span> — request a forensic audit of all UNASSIGNED transactions<br>
+<strong>FILE</strong> a public records request asking the Comptroller for a breakdown of all 599,420 unclassified payments: <a href='https://www.sec.state.ma.us/pre/preidx.htm' target='_blank'>MA Public Records Portal</a><br>
+<strong>EMAIL</strong> the Joint Committee on Ways & Means co-chairs — ask them to mandate payment classification<br>
+<strong>TESTIFY</strong> at the next Ways & Means hearing — <a href='https://malegislature.gov/Committees' target='_blank'>schedule at malegislature.gov</a><br>
+<strong>EMAIL</strong> CommonWealth Magazine: <a href='mailto:editors@commonwealthbeacon.org'>editors@commonwealthbeacon.org</a> — this is their kind of story<br>
+<strong>SHARE</strong> this finding on social media — $7,636 per filer with no audit trail is a number people remember
+</div></div></div>`;
+
+// FINDING 4 - THE LOBBYING ECONOMY
+h+=`<div class="cd" style="border-left:3px solid var(--amb)">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--t3)">4.</span>
+<span class="bd bw">HIGH</span>
+<span style="font-size:15px;font-weight:700;color:var(--t0)">Former legislators earn 4x their old salary lobbying for state vendors</span></div>
+<div style="font-size:12px;color:var(--t1);line-height:1.7;margin-bottom:10px">
+In 2024, the total amount paid to registered lobbyists in Massachusetts crossed $104.1 million. The current Senate President, Karen Spilka, earns $203,286. The following former legislators now earn multiples of that lobbying the same body they once served in:<br><br>
+<strong>Robert Travaglini</strong>, former Senate President, earned <strong style="color:var(--amb)">$854,000</strong> from lobbying clients in 2024 — 4.2x the current Senate President's salary.<br>
+<strong>Carlo Basile</strong>, former State Representative (East Boston, 2013–2014), earned <strong style="color:var(--amb)">$830,000</strong> at Smith, Costello & Crawford. SCC's healthcare clients receive $10.1B in state spending.<br>
+<strong>Chet Atkins</strong>, former US Congressman and MA state legislator, earned <strong style="color:var(--amb)">$600,000</strong> at Tremont Strategies Group. Two other Tremont partners also earn $600K each.<br>
+<strong>Michael Costello</strong>, former State Representative, earned <strong style="color:var(--amb)">$645,000</strong> as a partner at SCC.<br>
+<strong>Steven Baddour</strong>, former State Senator, earned <strong style="color:var(--amb)">$320,000</strong> at ML Strategies.<br>
+<strong>Anthony Petruccelli</strong>, former State Senator, earned <strong style="color:var(--amb)">$278,000</strong> at Kearney, Donovan & McGee, representing Mass General Brigham ($1.44B, +1,559% YoY).<br>
+<strong>Daniel Conley</strong>, former Suffolk County District Attorney, earned <strong style="color:var(--amb)">$150,000</strong> at ML Strategies.<br>
+<strong>William Weld</strong>, former Governor of Massachusetts, earned <strong style="color:var(--amb)">$100,000</strong> as a registered lobbyist at ML Strategies.<br>
+<strong>Marylou Sudders</strong>, former HHS Secretary under Gov. Baker, is now at Smith, Costello & Crawford.<br><br>
+14 lobbyists earned over $500,000 in 2024. 56 earned over $250,000. Eight profiled firms employ 349 clients with $21M in combined revenue.
+</div>
+<div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);margin-bottom:8px">Total MA lobbying 2024: $104.1M · Per filer: $29 · 8 firms profiled · 349 clients · $21M revenue · $11M in lobbyist salaries</div>
+<div class="acts"><div class="mil" style="color:var(--grn);margin-bottom:6px">WHAT YOU CAN DO — PICK ANY OR ALL</div>
+<div style="font-size:12px;color:var(--t1);line-height:1.8">
+<strong>FILE</strong> ethics complaints on specific revolving-door cases: <a href='https://www.mass.gov/how-to/file-a-complaint-with-the-state-ethics-commission' target='_blank'>State Ethics Commission</a> · <span class='phone'>617-371-9500</span><br>
+<strong>SUPPORT</strong> Common Cause Massachusetts — they advocate for lobbying reform: <a href='https://www.commoncause.org/massachusetts/' target='_blank'>commoncause.org/massachusetts</a><br>
+<strong>CONTACT</strong> your state representative — ask them to co-sponsor a mandatory 2-year cooling-off period bill<br>
+<strong>EMAIL</strong> Globe Spotlight: <a href='mailto:spotlight@globe.com'>spotlight@globe.com</a> — a former governor earning $100K as a lobbyist is a headline<br>
+<strong>EMAIL</strong> CommonWealth Beacon: <a href='mailto:editors@commonwealthbeacon.org'>editors@commonwealthbeacon.org</a> — they already cover this beat<br>
+<strong>ATTEND</strong> Joint Committee on State Administration hearings on lobbying reform — <a href='https://malegislature.gov/Committees' target='_blank'>malegislature.gov</a><br>
+<strong>SHARE</strong> the revolving door roster — former Senate Presidents, Governors, DAs, and HHS Secretaries earning 4x their old salary lobbying for state vendors
+</div></div></div>`;
+
+// REMAINING FINDINGS - MGB, SCC, McInnis, AIPAC (shortened)
+TARGETS.slice(3).forEach(tg=>{
+h+=`<div class="cd" style="border-left:3px solid ${tg.sv==='c'?'var(--red)':'var(--amb)'}">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--t3)">${tg.r+1}.</span>
+<span class="bd ${tg.sv==='c'?'bc':'bw'}">${tg.sv==='c'?'CRITICAL':'HIGH'}</span>
+<span style="font-size:15px;font-weight:700;color:var(--t0)">${tg.t}</span></div>
+<div style="font-size:12px;color:var(--t1);line-height:1.7;margin-bottom:10px">${tg.sum}</div>
+<div class="ppl"><div class="mil" style="margin-bottom:6px">INDIVIDUALS & ENTITIES</div>
+${tg.ppl.map(p=>`<div class="pp"><div class="ppn">${p.n}</div><div class="ppr">${p.r}</div><div class="ppd">${p.d}</div></div>`).join('')}</div>
+<div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);margin-bottom:8px">${tg.amt}</div>
+<div class="acts"><div class="mil" style="color:var(--grn);margin-bottom:6px">WHAT YOU CAN DO — PICK ANY OR ALL</div>
+<div style="font-size:12px;color:var(--t1);line-height:1.8">${tg.act}</div></div></div>`;
+});
+
+h+=`<div class="cd" style="background:var(--s2)">
+<div class="mil" style="color:var(--grn);margin-bottom:8px">CONTACT DIRECTORY</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px">
+<div><strong style="color:var(--t0)">State Ethics Commission</strong><br><span class='phone'>617-371-9500</span> · <a href="https://www.mass.gov/how-to/file-a-complaint-with-the-state-ethics-commission">File complaint</a></div>
+<div><strong style="color:var(--t0)">Inspector General</strong><br><span class='phone'>800-322-1323</span> · <a href="https://www.mass.gov/orgs/office-of-the-inspector-general">Report fraud</a></div>
+<div><strong style="color:var(--t0)">State Auditor</strong><br><span class='phone'>617-727-2075</span> · One Ashburton Place, Boston MA 02108</div>
+<div><strong style="color:var(--t0)">Attorney General</strong><br><span class='phone'>617-727-2200</span> · <a href="https://www.mass.gov/orgs/attorney-generals-office">Public Integrity Division</a></div>
+<div><strong style="color:var(--t0)">Public Records</strong><br><span class='phone'>617-727-2832</span> · <a href="https://www.sec.state.ma.us/pre/preidx.htm">Submit request</a></div>
+<div><strong style="color:var(--t0)">Boston Globe Spotlight</strong><br>spotlight@globe.com · <a href="https://www.bostonglobe.com/tips/">Submit tip</a></div>
+</div></div>`;
+h+=`<div class="note">All individuals named hold public offices or registered lobbying positions. All data is from public government databases. Contact information is from official government websites.</div>`;
+el.innerHTML=h;
+}
+
+function rBudget(el){
+const B=BUDGET;const maxC=B.cabinets[0].a;
+let h=`<p class="desc">Massachusetts FY2025. Tax revenue covers 44% of total expenditures. The remainder comes from federal grants, trust funds, capital bonds, and retained revenue.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+<div class="cd" style="border-left:3px solid var(--grn)"><div class="mil">REVENUE (Tax collections)</div><div style="font-size:22px;font-weight:700;color:var(--grn);margin:4px 0">${F(B.rev)}</div><div style="font-size:11px;color:var(--t2)">+${B.revGrowth}% vs FY24 · Includes $3.0B surtax + $2.4B capital gains</div></div>
+<div class="cd" style="border-left:3px solid var(--red)"><div class="mil">EXPENDITURES (All funds)</div><div style="font-size:22px;font-weight:700;color:var(--red);margin:4px 0">${F(B.spend)}</div><div style="font-size:11px;color:var(--t2)">Direct appropriations + trusts + capital + federal grants</div></div></div>
+<div class="stl">Spending by cabinet</div>`;
+B.cabinets.forEach(c=>{const w=(c.a/maxC*100);const p=(c.a/B.spend*100);
+h+=`<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--bdr)"><div style="flex:1"><div style="font-size:12px;font-weight:500">${c.n}</div><div class="bar" style="max-width:300px"><div class="barf" style="width:${w}%;background:${p>15?'var(--red)':p>5?'var(--amb)':'var(--blu)'}"></div></div></div><div class="rv" style="color:${p>15?'var(--red)':p>5?'var(--amb)':'var(--t1)'}">${F(c.a)}</div><div style="font-size:11px;color:var(--t3);width:45px;text-align:right">${p.toFixed(1)}%</div></div>`;});
+h+=`<div class="stl">Spending by object class</div>`;
+B.objects.forEach(o=>{const w=(o.a/B.objects[0].a*100);
+h+=`<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--bdr)"><div style="flex:1"><div style="font-size:12px">${o.n}</div><div class="bar" style="max-width:250px"><div class="barf" style="width:${w}%;background:var(--amb)"></div></div></div><div class="rv">${F(o.a)}</div><div style="font-size:11px;color:var(--t3);width:45px;text-align:right">${o.p}%</div></div>`;});
+h+=`<div class="note">36.6% of all spending ($36B) is classified as "Benefit programs" — primarily Medicaid managed care. These are the same vendors that appear in the lobbying and campaign finance analysis. Health & Human Services alone accounts for 36.8% of the total budget.</div>`;
+el.innerHTML=h;
+}
+
+function rFraud(el){
+let h=`<p class="desc">Structural vulnerabilities in Massachusetts state spending identified through automated analysis of the CTHRU expenditure database.</p>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px">
+<div class="k" style="border-left:3px solid var(--red)"><div class="kl">Untracked payments</div><div class="kv" style="color:var(--red)">$27.5B</div></div>
+<div class="k" style="border-left:3px solid var(--amb)"><div class="kl">Out-of-state drain</div><div class="kv" style="color:var(--amb)">$2.6B+</div></div>
+<div class="k" style="border-left:3px solid var(--prp)"><div class="kl">Top vendor concentration</div><div class="kv" style="color:var(--prp)">64.4%</div></div>
+<div class="k" style="border-left:3px solid var(--blu)"><div class="kl">Healthcare share</div><div class="kv" style="color:var(--blu)">36.8%</div></div></div>`;
+FRAUD.forEach(f=>{const bc=f.sv==='c'?'bc':f.sv==='w'?'bw':'bi';
+h+=`<div class="cd"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span class="bd ${bc}">${f.sv==='c'?'CRITICAL':f.sv==='w'?'ELEVATED':'MONITOR'}</span><span style="font-weight:700;color:var(--t0)">${f.e}</span></div>
+<div style="display:flex;gap:16px;margin-bottom:6px;font-size:12px">${f.s?`<span><span style="color:var(--t3)">Amount:</span> <strong style="color:var(--red)">${F(f.s)}</strong></span>`:''}${f.txn?`<span><span style="color:var(--t3)">Transactions:</span> <strong>${f.txn.toLocaleString()}</strong></span>`:''}${f.dp?`<span><span style="color:var(--t3)">Concentration:</span> <strong style="color:var(--amb)">${f.dp}%</strong></span>`:''}</div>
+<div style="font-size:12px;color:var(--t2);line-height:1.6">${f.c}</div></div>`;});
+el.innerHTML=h;
+}
+
+function rFlags(el){
+let h=`<p class="desc">Entities where state spending, lobbying activity, and campaign contributions overlap.</p>`;
+CH.forEach(c=>{const bc=c.sv==='c'?'bc':c.sv==='w'?'bw':'bi';
+h+=`<div class="cd"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="bd ${bc}">${c.sp||'PROFILED'}</span><span style="font-size:14px;font-weight:700;color:var(--t0)">${c.e}</span></div>`;
+h+=`<div class="mg">${[['Spending',F(c.s),'var(--t0)'],[(c.sa?'Spike '+c.sy:'—'),(c.sa?'+'+F(c.sa):'—'),'var(--red)'],['Lobbying',F(c.lt),'var(--amb)'],['Donations',F(c.ct),'var(--blu)']].map(([l,v,co])=>`<div class="mi"><div class="mil">${l}</div><div class="miv" style="color:${co}">${v}</div></div>`).join('')}</div>`;
+h+=`<div class="chn"><div class="cs"><div class="cl" style="color:var(--amb)">Lobbying</div>${c.lf}<div style="font-size:11px;color:var(--t3)">Focus: ${c.lx}</div></div>`;
+if(c.ct>0)h+=`<div class="cs"><div class="cl" style="color:var(--blu)">Campaign donations</div>${F(c.ct)} → ${c.po}</div>`;
+h+=`<div class="cs"><div class="cl" style="color:var(--red)">State spending</div>${F(c.s)} in FY2025${c.sp?' · <span style="color:var(--red)">'+c.sp+' YoY increase '+c.sy+'</span>':''}</div></div></div>`;});
+h+='<div class="note">These findings represent correlations, not conclusions. Spending increases may reflect legitimate policy changes. Lobbying is legal activity. These patterns warrant investigation.</div>';
+el.innerHTML=h;
+}
+
+function rAipac(el){
+const totA=AP.reduce((s,a)=>s+a.a,0);
+let h=`<div class="cd" style="border-left:3px solid var(--prp)">
+<div style="font-size:15px;font-weight:700;color:var(--t0);margin-bottom:4px">AIPAC and the Massachusetts federal delegation</div>
+<p style="font-size:12px;color:var(--t2);line-height:1.6">AIPAC was the single largest PAC contributor to members of Congress in the 2024 cycle. $51.8M in direct contributions. $37.9M in outside spending through its super PAC (United Democracy Project). $3.3M in direct lobbying. 7 of 11 Massachusetts federal delegation members accepted AIPAC funding. These are American elected officials accepting money from the most powerful foreign-interest lobbying operation in the country. The money influences votes on military aid, foreign policy, and billions in taxpayer-funded weapons transfers.</p></div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:12px 0">
+<div class="k"><div class="kl">To MA delegation</div><div class="kv" style="color:var(--prp)">${F(totA)}</div></div>
+<div class="k"><div class="kl">Recipients</div><div class="kv">7 / 11</div></div>
+<div class="k"><div class="kl">AIPAC national (2024)</div><div class="kv">$126.9M</div></div></div>`;
+AP.sort((a,b)=>b.a-a.a);
+AP.forEach(a=>{const st=a.s==='Rejects'||a.s==='Not endorsed'?'bg':a.s==='Returned'?'bw':'bp';
+h+=`<div class="cd"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+<span class="bd ${st}">${a.s}</span><span style="font-weight:600;color:var(--t0)">${a.n}</span>
+<span style="color:var(--t3);font-size:11px">${a.d} (${a.p})</span>
+${a.a>0?`<span style="margin-left:auto;font-weight:700;color:var(--prp);font-family:'JetBrains Mono',monospace">${F(a.a)}</span>`:''}
+</div><div style="font-size:12px;color:var(--t2)">${a.note}</div></div>`;});
+h+=`<div class="note">Data: FEC filings, OpenSecrets, TrackAIPAC. AIPAC PAC direct contributions are capped at $10K/cycle. Auchincloss's $933K includes all pro-Israel PAC sources (AIPAC, DMFI, NORPAC, etc.) since 2020.</div>`;
+el.innerHTML=h;
+}
+
+function rNet(el){
+const ND=[{id:"mgb",l:"Mass General Brigham",t:"v",x:400,y:60,sp:"+1,559%"},{id:"cca",l:"Commonwealth Care",t:"v",x:640,y:60},{id:"umm",l:"UMass Memorial",t:"v",x:180,y:60,sp:"+579%"},{id:"p32",l:"Point32Health",t:"v",x:840,y:130},{id:"evs",l:"Eversource",t:"v",x:60,y:190,sp:"+297%"},{id:"elv",l:"Elevance/WellPoint",t:"v",x:860,y:290},{id:"fln",l:"Fallon Health",t:"v",x:510,y:40},{id:"uhc",l:"United Healthcare",t:"v",x:760,y:55},{id:"kdm",l:"KDM (59 clients)",t:"l",x:330,y:225},{id:"scc",l:"SCC (103 clients)",t:"l",x:530,y:225},{id:"hck",l:"Hickey Assoc",t:"l",x:100,y:350},{id:"onl",l:"O'Neill Partners",t:"l",x:760,y:215},{id:"nxp",l:"Nixon Peabody",t:"l",x:860,y:400},{id:"img",l:"Issues Mgmt Grp",t:"l",x:700,y:150},{id:"hly",l:"Gov. Healey",t:"p",x:310,y:400},{id:"wu",l:"Mayor Wu",t:"p",x:410,y:440},{id:"gsk",l:"Rep. Gaskey",t:"p",x:60,y:460},{id:"ken",l:"Sen. Kennedy",t:"p",x:190,y:410}];
+const ED=[{f:"mgb",t:"kdm",l:"$306K",tp:"lo",w:4},{f:"umm",t:"scc",l:"$120K",tp:"lo",w:3},{f:"cca",t:"scc",l:"$150K",tp:"lo",w:3},{f:"cca",t:"img",l:"$108K",tp:"lo",w:2},{f:"uhc",t:"img",l:"$84K",tp:"lo",w:2},{f:"evs",t:"hck",l:"$180K",tp:"lo",w:3},{f:"p32",t:"onl",l:"$60K",tp:"lo",w:2},{f:"elv",t:"nxp",l:"$120K",tp:"lo",w:2},{f:"fln",t:"scc",l:"$15K",tp:"lo",w:1},{f:"mgb",t:"hly",l:"",tp:"do",w:1},{f:"mgb",t:"wu",l:"",tp:"do",w:1},{f:"evs",t:"gsk",l:"",tp:"do",w:1},{f:"umm",t:"ken",l:"",tp:"do",w:1}];
+const NC2={v:{f:"#1f1010",s:"#ef6b6b"},l:{f:"#1f1a0a",s:"#e8b84a"},p:{f:"#0a1520",s:"#5b9fd4"}};
+const EC2={lo:"#e8b84a",do:"#5b9fd4"};
+let h=`<p class="desc">Influence relationships between state vendors, lobbying firms, and elected officials. Click a node for details.</p>`;
+h+='<div class="leg"><span class="li"><span class="lb" style="background:#1f1010;border:1px solid #ef6b6b"></span>State vendors</span><span class="li"><span class="lb" style="background:#1f1a0a;border:1px solid #e8b84a"></span>Lobbying firms</span><span class="li"><span class="lb" style="background:#0a1520;border:1px solid #5b9fd4"></span>Officials</span><span class="li"><span class="ll" style="border-top:2px solid #e8b84a"></span>Lobbying fees</span><span class="li"><span class="ll" style="border-top:2px solid #5b9fd4"></span>Donations</span></div>';
+h+=`<svg viewBox="0 0 940 490">`;
+ED.forEach(e=>{const fn=ND.find(n=>n.id===e.f),tn=ND.find(n=>n.id===e.t);if(!fn||!tn)return;h+=`<line x1="${fn.x}" y1="${fn.y}" x2="${tn.x}" y2="${tn.y}" stroke="${EC2[e.tp]}" stroke-width="${e.w}" opacity="0.45"/>`;if(e.l)h+=`<text x="${(fn.x+tn.x)/2}" y="${(fn.y+tn.y)/2-5}" text-anchor="middle" font-size="8" font-weight="500" fill="${EC2[e.tp]}" opacity="0.8">${e.l}</text>`;});
+ND.forEach(n=>{const c=NC2[n.t];h+=`<g style="cursor:pointer" onclick="sn('${n.id}')"><rect x="${n.x-46}" y="${n.y-16}" width="92" height="32" rx="4" fill="${c.f}" stroke="${c.s}" stroke-width="1.3"/>`;if(n.sp)h+=`<rect x="${n.x+14}" y="${n.y-24}" width="32" height="12" rx="3" fill="#8b2020"/><text x="${n.x+30}" y="${n.y-15.5}" text-anchor="middle" font-size="7" font-weight="600" fill="#ef6b6b">${n.sp}</text>`;
+const words=n.l.split(' ');let l1=words.slice(0,Math.ceil(words.length/2)).join(' '),l2=words.slice(Math.ceil(words.length/2)).join(' ');
+if(n.l.length<=16){h+=`<text x="${n.x}" y="${n.y+3}" text-anchor="middle" font-size="9" font-weight="500" fill="${c.s}">${n.l}</text>`;}else{h+=`<text x="${n.x}" y="${n.y-2}" text-anchor="middle" font-size="8.5" font-weight="500" fill="${c.s}">${l1}</text><text x="${n.x}" y="${n.y+9}" text-anchor="middle" font-size="8.5" font-weight="500" fill="${c.s}">${l2}</text>`;}
+h+='</g>';});
+h+='</svg><div id="nd"></div>';el.innerHTML=h;
+}
+window.sn=function(id){
+const info={mgb:"Mass General Brigham — $1.44B in state spending, +1,559% YoY, $454K lobbying, $8K in donations to officials",cca:"Commonwealth Care Alliance — $1.3B state spending, $349K lobbying via SCC + Issues Mgmt Group",umm:"UMass Memorial — $250M state spending, +579% YoY, $124K lobbying, $1K to Sen. Kennedy",p32:"Point32Health (Harvard Pilgrim + Tufts) — $2.45B state spending, $624K lobbying",evs:"Eversource/NSTAR — $88M state spending, +297% YoY, $220K lobbying, $1K to Rep. Gaskey",elv:"Elevance/WellPoint — $1B state spending, $120K lobbying via Nixon Peabody",fln:"Fallon Health — $1.2B state spending, $15K lobbying via SCC",uhc:"United Healthcare — $618M state spending, $448K lobbying via Issues Mgmt Group + ML Strategies. Same lobbying firm (IMG) as Commonwealth Care Alliance.",kdm:"Kearney, Donovan & McGee — 59 clients, $3.5M revenue. Represents MGB ($1.44B). Former State Sen. Anthony Petruccelli on staff at $278K.",scc:"Smith, Costello & Crawford — 103 clients, $5.9M revenue. Healthcare clients receive $10.1B in state spending. Former State Rep. Carlo Basile earns $830K.",hck:"Hickey Associates — 22 clients, $1.4M revenue. Represents Eversource ($88M).",onl:"O'Neill & Partners — Represents Point32Health ($2.45B).",nxp:"Nixon Peabody — Represents Elevance/WellPoint ($1B).",img:"Issues Management Group — Represents BOTH CCA ($1.3B) AND United Healthcare ($618M). Combined $1.95B in state spending through clients of one firm.",hly:"Gov. Maura Healey — Appointed former BMC CEO Kate Walsh as HHS Secretary. Received campaign contributions from MGB.",wu:"Mayor Michelle Wu (Boston) — Received campaign contribution from MGB.",gsk:"Rep. John Gaskey — Received campaign contribution from Eversource.",ken:"Sen. Robyn Kennedy — Received campaign contribution from UMass Memorial."};
+document.getElementById('nd').innerHTML=`<div class="cd" style="margin-top:8px;font-size:12px;color:var(--t1);line-height:1.6">${info[id]||id}</div>`;};
+
+function rFirms(el){
+let h=`<p class="desc">Registered lobbying firms connecting state vendors to the legislature. Eight firms profiled. 349 total clients. $11M in lobbyist salaries. Data from MA Secretary of State, 2024.</p>`;
+FM.forEach(f=>{h+=`<div class="cd"><div style="font-size:14px;font-weight:700;color:var(--t0);margin-bottom:6px">${f.n}</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px">${[['Lobbyist salaries',F(f.s)],['Clients',f.c],['Revenue',F(f.r)]].map(([l,v])=>`<div class="mi"><div class="mil">${l}</div><div class="miv">${v}</div></div>`).join('')}</div>${f.tl?`<div style="font-size:12px;color:var(--t2);margin-bottom:3px">Top lobbyist: ${f.tl}</div>`:''}
+<div style="font-size:12px;color:var(--t2)">Key state-funded clients: ${f.sc}</div></div>`;});
+el.innerHTML=h;}
+
+function rAnom(el){
+let h=`<p class="desc">Vendor spending increases exceeding 150% year-over-year on baselines above $500K. FY2020–FY2025 data from CTHRU.</p>`;
+SK.forEach(s=>{const bc=s.p>500?'bc':s.p>300?'bw':'bi';h+=`<div class="row"><span class="bd ${bc}" style="min-width:55px;text-align:center">+${Math.round(s.p)}%</span><div style="flex:1"><div class="rn">${s.v}</div><div class="rs">FY${s.y}</div></div><div class="rv" style="color:var(--red)">+${F(s.i)}</div></div>`;});
+el.innerHTML=h;}
+
+function rLeg(el){
+const counties=['All','Suffolk','Middlesex','Essex','Norfolk','Worcester','Plymouth','Bristol','Hampden','Hampshire','Berkshire','Barnstable','Cape and Islands','Franklin'];
+let h=`<p class="desc">Massachusetts state legislators ranked by campaign contributions received ($1K+ only, 2022–2024). Filter by county to find your representatives.</p>
+<div style="margin-bottom:12px"><div class="mil" style="margin-bottom:4px">FILTER BY COUNTY</div>
+<div style="display:flex;gap:4px;flex-wrap:wrap">${counties.map(c=>`<button class="bd bi" style="cursor:pointer;border:none" onclick="filterLeg('${c}')" id="fc_${c.replace(/ /g,'_')}">${c}</button>`).join('')}</div>
+<div style="margin-top:8px"><input type="text" id="legSearch" placeholder="Search by name or district..." oninput="filterLeg(window._legCounty||'All')" style="font-size:12px;padding:6px 10px"></div></div>
+<div id="legList"></div>`;
+el.innerHTML=h;
+filterLeg('All');
+}
+
+function filterLeg(county){
+window._legCounty=county;
+const q=(document.getElementById('legSearch')?.value||'').toUpperCase();
+const filtered=LG.filter(l=>{
+const matchCounty=county==='All'||l.d.includes(county);
+const matchSearch=!q||l.n.toUpperCase().includes(q)||l.d.toUpperCase().includes(q);
+return matchCounty&&matchSearch;
+});
+// Update button styles
+document.querySelectorAll('[id^="fc_"]').forEach(b=>{b.style.outline=b.id==='fc_'+county.replace(/ /g,'_')?'2px solid var(--blu)':'none';});
+const el=document.getElementById('legList');
+el.innerHTML=`<div style="font-size:11px;color:var(--t3);margin-bottom:8px">${filtered.length} legislators${county!=='All'?' in '+county:''}</div>`+
+filtered.map(l=>`<div class="row"><div class="dot" style="background:${l.p==='R'?'var(--red)':'var(--blu)'}"></div><div style="flex:1"><span class="rn">${l.n}</span><span class="rs"> ${l.c==='H'?'House':'Senate'} (${l.p})</span><div style="font-size:11px;color:var(--amb);margin-top:1px">${l.d}</div>${l.td?`<div class="rs">Top donor: ${l.td}</div>`:''}</div>${l.f?`<div class="rv">${F(l.f)}</div>`:''}</div>`).join('');
+}
+window.filterLeg=filterLeg;
+
+function rAct(el){
+let h=`<p class="desc">Legal mechanisms available to any Massachusetts citizen for holding state government accountable. Listed by estimated impact.</p>`;
+AC.forEach(a=>{const ic=a.im==='vh'?'bc':a.im==='h'?'bw':'bi';const il=a.im==='vh'?'HIGH IMPACT':a.im==='h'?'MEDIUM':'STANDARD';
+h+=`<div class="cd" style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:16px">${a.i}</span><div style="flex:1"><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px"><span style="font-weight:600;color:var(--t0)">${a.t}</span><span class="bd ${ic}">${il}</span></div><div style="font-size:12px;color:var(--t2);margin-bottom:3px">${a.d}</div>${a.u?`<a href="${a.u}" target="_blank" style="font-size:11px">${a.u.replace('https://www.','').split('/')[0]} →</a>`:''}</div></div>`;});
+h+=`<div class="stl">Legal mechanisms</div><div class="cd">`;
+[["Taxpayer standing suits","MA law allows taxpayers to challenge illegal expenditures (Ch. 29, §63)."],["Qui tam / False Claims Act","Whistleblowers can sue on behalf of government and receive 15–30% of recovered funds."],["Campaign finance complaints","OCPF investigates contribution violations. File directly with documented evidence."],["Ballot initiatives","MA allows citizen-initiated ballot questions to address systemic gaps in transparency law."]].forEach(([t,d])=>{h+=`<div style="padding:6px 0;border-bottom:1px solid var(--bdr)"><div style="font-weight:500;color:var(--t0)">${t}</div><div style="font-size:12px;color:var(--t2)">${d}</div></div>`;});
+h+='</div>';el.innerHTML=h;}
+
+function rTips(el){
+let h=`<div class="cd" style="border-left:3px solid var(--grn)">
+<div style="font-size:15px;font-weight:700;color:var(--t0);margin-bottom:4px">Report a lead</div>
+<p style="font-size:12px;color:var(--t2);line-height:1.6">BEACON is built on public data. If you have direct knowledge of fraud, waste, or abuse in Massachusetts state spending — or if you can corroborate, correct, or expand on any finding here — submit it below. All submissions are anonymous by default.</p></div>
+<div class="cd" style="margin-top:12px">
+<div class="mil" style="margin-bottom:6px">CATEGORY</div>
+<div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">
+<button class="bd bw" onclick="this.style.outline='2px solid var(--amb)'" style="cursor:pointer;border:none">Spending concern</button>
+<button class="bd bp" onclick="this.style.outline='2px solid var(--prp)'" style="cursor:pointer;border:none">Lobbying connection</button>
+<button class="bd bi" onclick="this.style.outline='2px solid var(--blu)'" style="cursor:pointer;border:none">Campaign finance</button>
+<button class="bd bc" onclick="this.style.outline='2px solid var(--red)'" style="cursor:pointer;border:none">Fraud / waste</button>
+<button class="bd bg" onclick="this.style.outline='2px solid var(--grn)'" style="cursor:pointer;border:none">Correction</button></div>
+<div class="mil" style="margin-bottom:4px">ENTITY OR VENDOR</div>
+<input type="text" id="tipEntity" placeholder="Name of entity, vendor, or individual" style="margin-bottom:10px">
+<div class="mil" style="margin-bottom:4px">DETAILS</div>
+<textarea id="tipBody" rows="5" placeholder="What did you observe? Include dates, dollar amounts, names, contract numbers, or document references where possible."></textarea>
+<div class="mil" style="margin:10px 0 4px">EVIDENCE LINKS (optional)</div>
+<input type="text" id="tipLinks" placeholder="URLs to documents, filings, or news articles" style="margin-bottom:10px">
+<div class="mil" style="margin-bottom:4px">CONTACT (optional)</div>
+<input type="email" id="tipEmail" placeholder="Email for follow-up — leave blank to remain anonymous" style="margin-bottom:14px">
+<div style="display:flex;align-items:center;gap:12px">
+<button class="submit" onclick="submitTip()">Submit</button>
+<span id="tipStatus" style="font-size:12px;color:var(--t2)"></span></div></div>
+<div id="tipList" style="margin-top:14px"></div>`;
+el.innerHTML=h;loadTips();}
+
+async function submitTip(){
+const entity=document.getElementById('tipEntity').value;
+const body=document.getElementById('tipBody').value;
+const links=document.getElementById('tipLinks').value;
+if(!body){document.getElementById('tipStatus').textContent='Please provide details.';return;}
+const tip={entity,body,links,ts:new Date().toISOString().slice(0,16)};
+try{const ex=await window.storage.get('beacon-tips');const tips=ex?JSON.parse(ex.value):[];tips.unshift(tip);await window.storage.set('beacon-tips',JSON.stringify(tips));
+document.getElementById('tipStatus').textContent='Submitted. Thank you.';
+document.getElementById('tipEntity').value='';document.getElementById('tipBody').value='';document.getElementById('tipLinks').value='';loadTips();
+}catch(e){document.getElementById('tipStatus').textContent='Saved locally.';}}
+window.submitTip=submitTip;
+
+async function loadTips(){const el=document.getElementById('tipList');if(!el)return;
+try{const ex=await window.storage.get('beacon-tips');const tips=ex?JSON.parse(ex.value):[];
+if(!tips.length){el.innerHTML='';return;}
+el.innerHTML=`<div class="stl">Submitted tips (${tips.length})</div>`+tips.slice(0,10).map(t=>`<div class="cd"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-weight:600;color:var(--t0)">${t.entity||'General'}</span><span class="rs">${t.ts}</span></div><div style="font-size:12px;color:var(--t2)">${t.body.substring(0,200)}${t.body.length>200?'...':''}</div></div>`).join('');
+}catch(e){el.innerHTML='';}}
+window.loadTips=loadTips;
+
+rt();rc();
+</script>
